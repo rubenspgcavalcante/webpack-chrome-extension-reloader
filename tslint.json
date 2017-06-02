@@ -1,0 +1,11 @@
+{
+  "rules": {
+    "no-eval": true,
+    "indent": [true, "spaces"],
+    "no-duplicate-variable": true,
+    "one-line": [true, "check-open-brace", "check-whitespace"],
+    "variable-name": [true, "ban-keywords"],
+    "triple-equals": [true, "allow-null-check"],
+    "require-await": "error"
+  }
+}
