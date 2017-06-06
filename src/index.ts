@@ -18,7 +18,7 @@ export = class WebpackChromeReloaderPlugin extends AbstractChromePluginReloader 
         this._opts.entries = {contentScript: 'contentScript', background: 'background', ...this._opts.entries};
 
         const tmpl = template(rawSource);
-        this._source = template(tmpl({WSHost: `ws://localhost:${this._opts.port}`}));
+        this._source = tmpl({WSHost: `ws://localhost:${this._opts.port}`});
 
     }
 
