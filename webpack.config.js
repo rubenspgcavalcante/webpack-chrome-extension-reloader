@@ -2,6 +2,11 @@ const webpack = require("webpack");
 const path = require("path");
 const pack = require("./package.json");
 
+const { production, development, test } = ['production', 'development', 'test'].reduce((acc, env) => {
+  acc[env] = val => process.env.NODE_ENV === env ? val : null;
+  return acc;
+}, {});
+
 module.exports = {
   target: "node",
   entry: {
@@ -15,6 +20,10 @@ module.exports = {
     libraryTarget: "umd"
 
   },
+  plugins: [
+    production(new webpack.optimize.UglifyJsPlugin())
+
+  ].filter(plugin => !!plugin),
   externals: [Object.keys(pack.dependencies)],
   resolve: {
     modules: [path.resolve(__dirname, "src"), "node_modules"],
