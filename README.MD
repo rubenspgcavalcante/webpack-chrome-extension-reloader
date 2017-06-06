@@ -2,7 +2,7 @@
 
 A Webpack plugin to enable hot reloading while developing Chrome extensions.
 
-## Problem
+## Solution for ...
 Have your ever being annoyed while developing a Google Chrome extension, and being unable to use 
 webpack-hot-server because it's not a web app but a browser extension?
 
