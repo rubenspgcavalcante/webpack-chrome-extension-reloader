@@ -6,7 +6,8 @@ import * as template from "lodash.template";
 
 import AbstractChromePluginReloader from "./webpack/AbstractPlugin"
 import HotReloaderServer from "./utils/HotReloaderServer";
-import * as rawSource from "./wcpr-middleware.js.txt";
+import * as signals from "./utils/signals";
+import * as rawSource from "raw-loader!./wcpr-middleware";
 
 export = class WebpackChromeReloaderPlugin extends AbstractChromePluginReloader {
     _opts: PluginOptions;
@@ -18,8 +19,10 @@ export = class WebpackChromeReloaderPlugin extends AbstractChromePluginReloader 
         this._opts.entries = {contentScript: 'contentScript', background: 'background', ...this._opts.entries};
 
         const tmpl = template(rawSource);
-        this._source = tmpl({WSHost: `ws://localhost:${this._opts.port}`});
-
+        this._source = tmpl({
+            WSHost: `ws://localhost:${this._opts.port}`,
+            signals: JSON.stringify(signals)
+        });
     }
 
     appendMiddleware(file, filename, compilation) {

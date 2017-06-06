@@ -1,5 +1,5 @@
-import {Server, OPEN} from 'ws';
-import {SIGN_CHANGE, signChange, signLog} from "./signals";
+import {OPEN, Server} from "ws";
+import {signChange, signLog} from "./signals";
 
 export default class HotReloaderServer {
     _server: Server;

@@ -24,3 +24,8 @@ declare module "*.source.ts" {
     const sourceCode: string;
     export = sourceCode;
 }
+
+declare module "raw-loader*" {
+    const rawText: string;
+    export = rawText;
+}

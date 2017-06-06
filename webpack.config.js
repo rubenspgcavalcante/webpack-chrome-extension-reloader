@@ -31,6 +31,10 @@ module.exports = {
       test: /\.tsx?$/,
       loaders: [{ loader: "source-map-loader" }, { loader: "tslint-loader", options: { configFile: "./tslint.json" } }]
     }, {
+      test: /\.jsx?$/,
+      exclude: /node_modules/,
+      loaders: ["babel-loader"],
+    }, {
       test: /\.tsx?$/,
       exclude: /node_modules/,
       loaders: ["babel-loader", "ts-loader"],
