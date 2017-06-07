@@ -43,3 +43,6 @@ plugins: [
     })
 ]
 ```
+
+### License
+This project is under the [MIT LICENSE](http://opensource.org/licenses/MIT)
