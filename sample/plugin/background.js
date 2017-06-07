@@ -1,1 +1,1 @@
-console.log("Bg script running");
+console.info("Change anything here");

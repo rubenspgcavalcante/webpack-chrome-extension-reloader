@@ -5,6 +5,7 @@
 /*  external argument must be provided using it       */
 /* -------------------------------------------------- */
 const signals: any = JSON.parse('<%= signals %>');
+const reloadPage: boolean = <'true' | 'false'>'<%= reloadPage %>' === "true";
 const {SIGN_CHANGE, SIGN_RELOAD, SIGN_RELOADED} = signals;
 
 const {runtime} = chrome;
@@ -21,7 +22,7 @@ function contentScriptWorker() {
 
             runtime.sendMessage({type: SIGN_RELOAD}, function () {
                 socket.send(JSON.stringify({type: SIGN_RELOADED, payload: `${manifest.name} successfully reloaded`}));
-                window.location.reload();
+                reloadPage && window.location.reload();
             });
         }
         else {

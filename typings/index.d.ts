@@ -10,6 +10,8 @@ declare type ActionFactory = (payload?: any) => Action;
 declare type PluginOptions = { ssl: boolean, port: number, reloadPage: boolean, entries: EntriesOption };
 declare type EntriesOption = { background: string, contentScript: string };
 
+declare type MiddlewareTemplateParams = { port: number, reloadPage: boolean };
+
 declare module '*.json' {
     const json: any;
     export = json;
