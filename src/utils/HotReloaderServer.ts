@@ -11,7 +11,6 @@ export default class HotReloaderServer {
     listen() {
         this._server.on('connection', ws => {
             ws.on('message', data => console.info(`Message from the client: ${JSON.parse(data).payload}`));
-            ws.send(JSON.stringify(signLog("[ Connected on Chrome Plugin Hot Reload Server ]")));
         });
     }
 

@@ -4,7 +4,6 @@ import AbstractChromePluginReloader from "./webpack/AbstractPlugin";
 import HotReloaderServer from "./utils/HotReloaderServer";
 import MiddlewareSourceBuilder from "./utils/MiddlewareSourceBuilder";
 
-
 export default class ChromeExtensionReloader extends AbstractChromePluginReloader {
     private _opts: PluginOptions;
     private _source: string;
