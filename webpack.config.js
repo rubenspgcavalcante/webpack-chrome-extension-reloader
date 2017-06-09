@@ -9,9 +9,11 @@ const { production, development, test } = ['production', 'development', 'test'].
 
 module.exports = {
   target: "node",
-  entry: {
-    'webpack-chrome-extension-reloader': "./src/index.ts"
-  },
+  entry: development({
+    'webpack-chrome-extension-reloader': './src/index.ts'
+  }) || test({
+    'tests': './specs/index.specs.ts'
+  }),
   devtool: "source-map",
   output: {
     publicPath: ".",
@@ -22,7 +24,6 @@ module.exports = {
   },
   plugins: [
     production(new webpack.optimize.UglifyJsPlugin())
-
   ].filter(plugin => !!plugin),
   externals: [Object.keys(pack.dependencies)],
   resolve: {

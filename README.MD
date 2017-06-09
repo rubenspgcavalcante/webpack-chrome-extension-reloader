@@ -1,5 +1,6 @@
 # Webpack Chrome Extension Reloader
 [![npm version](https://badge.fury.io/js/webpack-chrome-extension-reloader.svg)](https://badge.fury.io/js/webpack-chrome-extension-reloader)
+[![Build Status](https://travis-ci.org/rubenspgcavalcante/webpack-chrome-extension-reloader.svg?branch=master)](https://travis-ci.org/rubenspgcavalcante/webpack-chrome-extension-reloader)
 
 A Webpack plugin to enable hot reloading while developing Chrome extensions.
 
