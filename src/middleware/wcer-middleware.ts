@@ -16,8 +16,9 @@
     const RECONNECT_INTERVAL = 2000;
     const SOCKET_ERR_CODE_REF = 'https://tools.ietf.org/html/rfc6455#section-7.4.1';
 
-    const formatter = msg => `[ WCER: ${msg} ]`;
+    const formatter = (msg: string) => `[ WCER: ${msg} ]`;
     const logger = (msg, level = 'info') => console[level](formatter(msg));
+    const dateFormatter = (datetime: number) => `${datetime / 3600}:${datetime / 6000}:${datetime / 1000}`;
 
     function contentScriptWorker() {
         runtime.sendMessage({type: SIGN_CONNECT}, msg => console.info(msg));
@@ -51,7 +52,7 @@
                     loadedTabs.forEach(tab => tabs.sendMessage(tab.id, {type: SIGN_RELOAD}));
                     socket.send(JSON.stringify({
                         type: SIGN_RELOADED,
-                        payload: formatter(`${new Date().toDateString()} - ${manifest.name} successfully reloaded`)
+                        payload: formatter(`${dateFormatter(Date.now())} - ${manifest.name} successfully reloaded`)
                     }));
                     runtime.reload();
                 });

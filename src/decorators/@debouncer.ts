@@ -1,4 +1,4 @@
-import {throttle, runInContext} from "lodash";
+import {debounce, runInContext} from "lodash";
 
 export default function FastReloadingThrottle(maxCalls: number, timeFrame: number, context: any = null) {
     if (context) {
@@ -8,7 +8,7 @@ export default function FastReloadingThrottle(maxCalls: number, timeFrame: numbe
     return function FastReloadingThrottleDecorator(target: any, property: string, descriptor: PropertyDescriptor) {
         const originalMethod = descriptor.value;
 
-        descriptor.value = throttle(function (...args) {
+        descriptor.value = debounce(function (...args) {
             return originalMethod.apply(this, args);
         }, timeFrame / maxCalls);
     }

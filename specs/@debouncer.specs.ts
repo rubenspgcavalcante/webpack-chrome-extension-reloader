@@ -1,14 +1,13 @@
 import {assert} from "chai";
 import {useFakeTimers} from "sinon";
-import FastReloadingThrottle from "../src/decorators/@FastReloadingThrottle";
+import FastReloadingThrottle from "../src/decorators/@debouncer";
 import {MAX_CALLS, TIME_FRAME} from "../src/constants/fast-reloading.constants";
 
 const _ = require("lodash");
 
-describe("FastReloadingThrottle decorator", () => {
+describe("debouncer decorator", () => {
     let calls;
     const clock = useFakeTimers();
-    const MAX_CALLS_PER_MILLI = TIME_FRAME / MAX_CALLS;
 
     class Sample {
         @FastReloadingThrottle(MAX_CALLS, TIME_FRAME, global)
@@ -25,13 +24,13 @@ describe("FastReloadingThrottle decorator", () => {
         clock.restore();
     });
 
-    it(`It should not let the method be called more than once per ${MAX_CALLS_PER_MILLI / 1000} secs.`, () => {
+    it(`It should debounce the method call for ${TIME_FRAME/MAX_CALLS}`, () => {
         const sample = new Sample();
-        const interval = setInterval(() => sample.test(), 500);
-        const frame = 4001;
 
-        clock.tick(frame);
-        clearInterval(interval);
-        assert.equal(calls, (frame / MAX_CALLS_PER_MILLI).toFixed(0));
+        sample.test();
+        clock.tick(400);
+        sample.test();
+        clock.tick(TIME_FRAME/MAX_CALLS);
+        assert.equal(calls, 1);
     });
 });

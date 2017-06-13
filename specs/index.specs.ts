@@ -1,2 +1,2 @@
 import "./middlewareSourceBuilder.specs";
-import "./@FastReloadingThrottle.specs";
+import "./@debouncer.specs";
