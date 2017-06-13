@@ -1,6 +1,6 @@
-import * as template from "lodash.template"
+import {template} from "lodash"
 import * as signals from "../utils/signals";
-import * as rawSource from "raw-loader!../middleware/wcpr-middleware";
+import * as rawSource from "raw-loader!../middleware/wcer-middleware";
 
 export default function middleWareSourceBuilder({port, reloadPage}: MiddlewareTemplateParams): string {
     const tmpl = template(rawSource);

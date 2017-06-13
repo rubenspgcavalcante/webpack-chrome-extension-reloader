@@ -1,5 +1,7 @@
 import {OPEN, Server} from "ws";
-import {signChange, signLog} from "./signals";
+import {signChange} from "./signals";
+import FastReloadingThrottle from "../decorators/@FastReloadingThrottle";
+import {MAX_CALLS, TIME_FRAME} from "../constants/fast-reloading.constants";
 
 export default class HotReloaderServer {
     _server: Server;
@@ -14,6 +16,7 @@ export default class HotReloaderServer {
         });
     }
 
+    @FastReloadingThrottle(MAX_CALLS, TIME_FRAME)
     signChange(reloadPage) {
         try {
             this._server.clients.forEach(client => {
