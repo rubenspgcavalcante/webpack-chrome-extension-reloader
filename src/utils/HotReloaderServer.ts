@@ -17,16 +17,17 @@ export default class HotReloaderServer {
     }
 
     @FastReloadingThrottle(MAX_CALLS, TIME_FRAME)
-    signChange(reloadPage) {
+    signChange(reloadPage, done: Function) {
         try {
             this._server.clients.forEach(client => {
                 if (client.readyState === OPEN) {
-                    client.send(JSON.stringify(signChange({reloadPage})))
+                    client.send(JSON.stringify(signChange({reloadPage})));
                 }
             });
+            done();
         }
         catch (err) {
-            console.error(err);
+            done(err);
         }
     }
 }

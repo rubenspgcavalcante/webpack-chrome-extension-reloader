@@ -3,5 +3,5 @@
  * before block the plugin for be reloading itself to much
  */
 
-export const MAX_CALLS = 5;
+export const MAX_CALLS = 2;
 export const TIME_FRAME = 10 * 1000;

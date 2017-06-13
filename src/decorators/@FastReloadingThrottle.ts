@@ -7,7 +7,10 @@ export default function FastReloadingThrottle(maxCalls: number, timeFrame: numbe
 
     return function FastReloadingThrottleDecorator(target: any, property: string, descriptor: PropertyDescriptor) {
         const originalMethod = descriptor.value;
-        descriptor.value = throttle((...args) => originalMethod.apply(this, args), timeFrame / maxCalls);
+
+        descriptor.value = throttle(function (...args) {
+            return originalMethod.apply(this, args);
+        }, timeFrame / maxCalls);
     }
 }
 

@@ -27,8 +27,7 @@ export default class ChromeExtensionReloader extends AbstractChromePluginReloade
         server.listen();
 
         compiler.plugin("emit", (comp, call) => {
-            server.signChange(reloadPage);
-            call();
+            server.signChange(reloadPage, call);
         });
     }
 }

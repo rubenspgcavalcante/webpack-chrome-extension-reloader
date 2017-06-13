@@ -10,7 +10,7 @@
     const wsHost = '<%= WSHost %>';
     const {SIGN_CHANGE, SIGN_RELOAD, SIGN_RELOADED, SIGN_LOG, SIGN_CONNECT} = signals;
 
-    const {runtime, tabs} = chrome;
+    const {runtime, tabs, management} = chrome;
     const manifest = runtime.getManifest();
 
     const RECONNECT_INTERVAL = 2000;
