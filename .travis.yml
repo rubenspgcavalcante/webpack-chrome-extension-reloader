@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+- '7'
+
+before_script: npm run build
+script: npm run test
+
+cache: yarn
+branches:
+  only:
+  - master

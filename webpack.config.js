@@ -2,16 +2,16 @@ const webpack = require("webpack");
 const path = require("path");
 const pack = require("./package.json");
 
-const { production, development, test } = ['production', 'development', 'test'].reduce((acc, env) => {
-  acc[env] = val => process.env.NODE_ENV === env ? val : null;
+const { production, development, test } = ["production", "development", "test"].reduce((acc, env) => {
+  acc[env] = (val) => process.env.NODE_ENV === env ? val : null;
   return acc;
 }, {});
 
 module.exports = {
   target: "node",
-  entry: {
-    'webpack-chrome-extension-reloader': "./src/index.ts"
-  },
+  entry: test({
+    "tests": './specs/index.specs.ts'
+  }) || { "webpack-chrome-extension-reloader": './src/index.ts' },
   devtool: "source-map",
   output: {
     publicPath: ".",
@@ -22,8 +22,7 @@ module.exports = {
   },
   plugins: [
     production(new webpack.optimize.UglifyJsPlugin())
-
-  ].filter(plugin => !!plugin),
+  ].filter((plugin) => !!plugin),
   externals: [Object.keys(pack.dependencies)],
   resolve: {
     modules: [path.resolve(__dirname, "src"), "node_modules"],
@@ -32,11 +31,11 @@ module.exports = {
   },
   module: {
     rules: [{
-      enforce: 'pre',
+      enforce: "pre",
       test: /\.js$/,
       loader: "source-map-loader"
     }, {
-      enforce: 'pre',
+      enforce: "pre",
       test: /\.tsx?$/,
       loaders: [{ loader: "source-map-loader" }, { loader: "tslint-loader", options: { configFile: "./tslint.json" } }]
     }, {

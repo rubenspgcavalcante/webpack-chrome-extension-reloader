@@ -12,6 +12,7 @@
     ],
     "types": [
       "node",
+      "mocha",
       "chrome"
     ]
   },
@@ -22,12 +23,11 @@
     }
   ],
   "files": [
-    "typings/index.d.ts",
-    "package.json"
+    "typings/index.d.ts"
   ],
   "include": [
-    "package.json",
-    "src/**/*"
+    "src/**/*",
+    "specs/**/*"
   ],
   "exclude": [
     "node_modules",
