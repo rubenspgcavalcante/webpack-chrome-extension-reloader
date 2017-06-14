@@ -9,11 +9,9 @@ const { production, development, test } = ["production", "development", "test"].
 
 module.exports = {
   target: "node",
-  entry: development({
-    "webpack-chrome-extension-reloader": './src/index.ts'
-  }) || test({
+  entry: test({
     "tests": './specs/index.specs.ts'
-  }),
+  }) || { "webpack-chrome-extension-reloader": './src/index.ts' },
   devtool: "source-map",
   output: {
     publicPath: ".",

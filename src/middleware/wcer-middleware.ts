@@ -10,7 +10,7 @@
     const wsHost = '<%= WSHost %>';
     const {SIGN_CHANGE, SIGN_RELOAD, SIGN_RELOADED, SIGN_LOG, SIGN_CONNECT} = signals;
 
-    const {runtime, tabs, management} = chrome;
+    const {runtime, tabs} = chrome;
     const manifest = runtime.getManifest();
 
     const RECONNECT_INTERVAL = 2000;
@@ -18,7 +18,7 @@
 
     const formatter = (msg: string) => `[ WCER: ${msg} ]`;
     const logger = (msg, level = 'info') => console[level](formatter(msg));
-    const dateFormatter = (datetime: number) => `${datetime / 3600}:${datetime / 6000}:${datetime / 1000}`;
+    const timeFormatter = (date: Date) => date.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
 
     function contentScriptWorker() {
         runtime.sendMessage({type: SIGN_CONNECT}, msg => console.info(msg));
@@ -52,7 +52,7 @@
                     loadedTabs.forEach(tab => tabs.sendMessage(tab.id, {type: SIGN_RELOAD}));
                     socket.send(JSON.stringify({
                         type: SIGN_RELOADED,
-                        payload: formatter(`${dateFormatter(Date.now())} - ${manifest.name} successfully reloaded`)
+                        payload: formatter(`${timeFormatter(new Date())} - ${manifest.name} successfully reloaded`)
                     }));
                     runtime.reload();
                 });

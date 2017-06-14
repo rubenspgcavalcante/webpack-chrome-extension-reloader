@@ -1,7 +1,8 @@
 import {OPEN, Server} from "ws";
 import {signChange} from "./signals";
 import debouncer from "../decorators/@debouncer";
-import {MAX_CALLS, TIME_FRAME} from "../constants/fast-reloading.constants";
+import fastReloadBlock from "../decorators/@fastReloadBlock";
+import {DEBOUNCING_FRAME, FAST_RELOAD_CALLS, FAST_RELOAD_WAIT} from "../constants/fast-reloading.constants";
 
 export default class HotReloaderServer {
     _server: Server;
@@ -10,20 +11,25 @@ export default class HotReloaderServer {
         this._server = new Server({port});
     }
 
+    private _sendMsg(msg: any) {
+        this._server.clients.forEach(client => {
+            if (client.readyState === OPEN) {
+                client.send(JSON.stringify(msg));
+            }
+        });
+    }
+
     listen() {
         this._server.on('connection', ws => {
             ws.on('message', data => console.info(`Message from the client: ${JSON.parse(data).payload}`));
         });
     }
 
-    @debouncer(MAX_CALLS, TIME_FRAME)
+    @debouncer(DEBOUNCING_FRAME)
+    @fastReloadBlock(FAST_RELOAD_CALLS, FAST_RELOAD_WAIT)
     signChange(reloadPage, done: Function) {
         try {
-            this._server.clients.forEach(client => {
-                if (client.readyState === OPEN) {
-                    client.send(JSON.stringify(signChange({reloadPage})));
-                }
-            });
+            this._sendMsg(signChange({reloadPage}));
             done();
         }
         catch (err) {
