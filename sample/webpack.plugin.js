@@ -1,6 +1,7 @@
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const WebpackChromeReloaderPlugin = require("..");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -9,12 +10,13 @@ module.exports = {
   },
   output: {
     publicPath: ".",
-    path: "./sample/dist",
+    path: __dirname + "/dist",
     filename: "[name].js",
     libraryTarget: "umd"
   },
   plugins: [
     new WebpackChromeReloaderPlugin(),
+    new ExtractTextPlugin({ filename: 'sample.css' }),
     new CopyWebpackPlugin([{ from: './sample/plugin/manifest.json', flatten: true}])
   ],
   module: {
@@ -22,6 +24,14 @@ module.exports = {
       test: /\.js?$/,
       exclude: /node_modules/,
       loaders: ["babel-loader"]
+    },
+    {
+      test: /\.css$/,
+      exclude: /node_modules/,
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: 'css-loader!postcss-loader?sourceMap',
+      }),
     }]
   }
 };
