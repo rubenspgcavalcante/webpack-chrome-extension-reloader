@@ -1,5 +1,6 @@
 import {install} from "source-map-support";
+import ChromeExtensionReloader from "./ChromeExtensionReloader";
+
 install();
 
-import ChromeExtensionReloader from "./ChromeExtensionReloader";
 export = ChromeExtensionReloader;

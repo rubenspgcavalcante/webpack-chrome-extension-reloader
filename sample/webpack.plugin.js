@@ -1,4 +1,3 @@
-const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const WebpackChromeReloaderPlugin = require("..");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -17,15 +16,19 @@ module.exports = {
   plugins: [
     new WebpackChromeReloaderPlugin(),
     new ExtractTextPlugin({ filename: 'sample.css' }),
-    new CopyWebpackPlugin([{ from: './sample/plugin/manifest.json', flatten: true}])
+    new CopyWebpackPlugin([{ from: './sample/plugin/manifest.json', flatten: true }])
   ],
   module: {
     rules: [{
       test: /\.js?$/,
       exclude: /node_modules/,
-      loaders: ["babel-loader"]
-    },
-    {
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: [require('babel-preset-es2015')]
+        }
+      }
+    }, {
       test: /\.css$/,
       exclude: /node_modules/,
       use: ExtractTextPlugin.extract({

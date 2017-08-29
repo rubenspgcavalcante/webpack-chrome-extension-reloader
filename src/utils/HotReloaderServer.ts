@@ -11,14 +11,6 @@ export default class HotReloaderServer {
         this._server = new Server({port});
     }
 
-    private _sendMsg(msg: any) {
-        this._server.clients.forEach(client => {
-            if (client.readyState === OPEN) {
-                client.send(JSON.stringify(msg));
-            }
-        });
-    }
-
     listen() {
         this._server.on('connection', ws => {
             ws.on('message', data => console.info(`Message from the client: ${JSON.parse(data).payload}`));
@@ -35,5 +27,13 @@ export default class HotReloaderServer {
         catch (err) {
             done(err);
         }
+    }
+
+    private _sendMsg(msg: any) {
+        this._server.clients.forEach(client => {
+            if (client.readyState === OPEN) {
+                client.send(JSON.stringify(msg));
+            }
+        });
     }
 }
