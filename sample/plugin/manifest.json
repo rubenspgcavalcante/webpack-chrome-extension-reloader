@@ -14,6 +14,9 @@
       ],
       "js": [
         "content-script.js"
+      ],
+      "css": [
+        "sample.css"
       ]
     }
   ]
