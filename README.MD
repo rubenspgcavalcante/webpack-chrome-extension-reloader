@@ -21,19 +21,16 @@ This plugin still under development, so maybe some features are missing. Of cour
 
 ## How to use
 
-First import the module
+Add `webpack-chrome-extension-reloader` to the plugins section of your webpack configuration file.
 ```js
 const ChromeExtensionReloader  = require('webpack-chrome-extension-reloader');
-```
 
-And then, just add it to the plugins section of the webpack configuration file.
-```js
 plugins: [
     new ChromeExtensionReloader() // ONLY USE IT IN DEVELOPMENT BUILD!
 ]
 ```
 
-You can also inform some options (the following are the default ones):
+You can also set some options (the following are the default ones):
 ```js
 plugins: [
     new ChromeExtensionReloader({
@@ -44,8 +41,18 @@ plugins: [
         background: 'background'
       }
     })
-]
+],
+entry: {
+    'content-script': './my-content-script.js',
+    background: './my-background-script.js'
+}
 ```
+
+**Note:**
+You must have both background and content scripts for this plugin to work, and they must be specified in separate `entry` chunks
+in your webpack config.
+
+You can find an example extension project configuration in the `sample` folder of this repo.
 
 ### License
 This project is under the [MIT LICENSE](http://opensource.org/licenses/MIT)
