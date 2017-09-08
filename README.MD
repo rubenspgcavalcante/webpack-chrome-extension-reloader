@@ -6,33 +6,31 @@
 A Webpack plugin to enable hot reloading while developing Chrome extensions.
 
 ## Solution for ...
-Have your ever being annoyed while developing a Google Chrome extension, and being unable to use 
+Have your ever being annoyed while developing a Google Chrome extension, and being unable to use
 webpack-hot-server because it's not a web app but a browser extension?
 
 Well, now you can do hot reloading!
 
 ## What it does?
 Basically something similar to what the webpack hot reload middleware does. When you change the code and the webpack
-trigger and finish the compilation, your extension is notified and then reloaded using the chrome.runtime API.
- 
+trigger and finish the compilation, your extension is notified and then reloaded using the chrome.runtime API.  Check out
+[Hot reloading Chrome extensions using Webpack](https://medium.com/front-end-hacking/hot-reloading-extensions-using-webpack-cdfa0e4d5a08) for more background.
+
 ## Warning!
 This plugin still under development, so maybe some features are missing. Of course, it's open to any PR's to improve that!
 
 ## How to use
 
-First import the module
+Add `webpack-chrome-extension-reloader` to the plugins section of your webpack configuration file.
 ```js
 const ChromeExtensionReloader  = require('webpack-chrome-extension-reloader');
-```
 
-And then, just add it to the plugins section of the webpack configuration file.
-```js
 plugins: [
     new ChromeExtensionReloader() // ONLY USE IT IN DEVELOPMENT BUILD!
 ]
 ```
 
-You can also inform some options (the following are the default ones):
+You can also set some options (the following are the default ones):
 ```js
 plugins: [
     new ChromeExtensionReloader({
@@ -43,8 +41,18 @@ plugins: [
         background: 'background'
       }
     })
-]
+],
+entry: {
+    'content-script': './my-content-script.js',
+    background: './my-background-script.js'
+}
 ```
+
+**Note:**
+You must have both background and content scripts for this plugin to work, and they must be specified in separate `entry` chunks
+in your webpack config.
+
+You can find an example extension project configuration in the `sample` folder of this repo.
 
 ### License
 This project is under the [MIT LICENSE](http://opensource.org/licenses/MIT)
