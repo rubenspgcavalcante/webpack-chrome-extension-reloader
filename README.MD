@@ -6,15 +6,16 @@
 A Webpack plugin to enable hot reloading while developing Chrome extensions.
 
 ## Solution for ...
-Have your ever being annoyed while developing a Google Chrome extension, and being unable to use 
+Have your ever being annoyed while developing a Google Chrome extension, and being unable to use
 webpack-hot-server because it's not a web app but a browser extension?
 
 Well, now you can do hot reloading!
 
 ## What it does?
 Basically something similar to what the webpack hot reload middleware does. When you change the code and the webpack
-trigger and finish the compilation, your extension is notified and then reloaded using the chrome.runtime API.
- 
+trigger and finish the compilation, your extension is notified and then reloaded using the chrome.runtime API.  Check out
+[Hot reloading Chrome extensions using Webpack](https://medium.com/front-end-hacking/hot-reloading-extensions-using-webpack-cdfa0e4d5a08) for more background.
+
 ## Warning!
 This plugin still under development, so maybe some features are missing. Of course, it's open to any PR's to improve that!
 
