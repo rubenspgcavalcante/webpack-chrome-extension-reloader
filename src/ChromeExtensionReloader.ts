@@ -29,7 +29,7 @@ export default class ChromeExtensionReloader extends AbstractChromePluginReloade
         const server = new HotReloaderServer(port);
         server.listen();
 
-        compiler.plugin("emit", (comp, call) => {
+        compiler.plugin("after-emit", (comp, call) => {
             if (this._hash !== comp.hash) {
                 this._hash = comp.hash;
                 server.signChange(reloadPage, call);
