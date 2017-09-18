@@ -2,6 +2,13 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
+    "lib": [
+      "DOM",
+      "ES6",
+      "ScriptHost",
+      "DOM.Iterable",
+      "ES2016.Array.Include"
+    ],
     "target": "es6",
     "sourceMap": true,
     "module": "commonjs",
