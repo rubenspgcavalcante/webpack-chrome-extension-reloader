@@ -1,6 +1,7 @@
 .idea/
 .vscode/
 .bin/
+.tmp/
 .DS_STORE
 dist/
 

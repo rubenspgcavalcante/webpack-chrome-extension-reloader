@@ -13,7 +13,7 @@ export default class HotReloaderServer {
 
     listen() {
         this._server.on('connection', ws => {
-            ws.on('message', data => console.info(`Message from the client: ${JSON.parse(data).payload}`));
+            ws.on('message', (data: string) => console.info(`Message from the client: ${JSON.parse(data).payload}`));
         });
     }
 
