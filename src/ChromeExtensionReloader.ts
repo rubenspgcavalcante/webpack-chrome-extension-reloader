@@ -13,7 +13,7 @@ export default class ChromeExtensionReloader extends AbstractChromePluginReloade
         super();
         this._hash = '';
         this._opts = {reloadPage: true, port: 9090, ...options};
-        this._opts.entries = {contentScript: 'contentScript', background: 'background', ...this._opts.entries};
+        this._opts.entries = {contentScript: 'content-script', background: 'background', ...this._opts.entries};
 
         this._source = middlewareSourceBuilder({
             port: this._opts.port,
@@ -22,8 +22,8 @@ export default class ChromeExtensionReloader extends AbstractChromePluginReloade
     }
 
     apply(compiler) {
-        const {port, reloadPage} = this._opts;
-        compiler.plugin("compilation", compilation => middlewareInjector(compilation, this._source));
+        const {port, reloadPage, entries} = this._opts;
+        compiler.plugin("compilation", compilation => middlewareInjector(entries, compilation, this._source));
 
         console.info(green("[ Starting the Chrome Hot Plugin Reload Server... ]"));
         const server = new HotReloaderServer(port);
