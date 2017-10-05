@@ -1,8 +1,3 @@
-declare interface AbstractChromePluginReloader {
-    context: any;
-    apply(options?: any)
-}
-
 declare type ActionType = string;
 declare type Action = { type: ActionType, payload?: any };
 declare type ActionFactory = (payload?: any) => Action;
