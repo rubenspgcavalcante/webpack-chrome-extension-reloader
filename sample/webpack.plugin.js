@@ -4,8 +4,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
-    "content-script": "./sample/plugin/content-script.js",
-    "background": "./sample/plugin/background.js"
+    "content-script": "./sample/plugin/my-content-script.js",
+    "background": "./sample/plugin/my-background.js"
   },
   output: {
     publicPath: ".",
