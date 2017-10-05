@@ -1,42 +1,28 @@
 import AbstractChromePluginReloader from "./webpack/AbstractPlugin";
-import HotReloaderServer from "./utils/HotReloaderServer";
 import middlewareSourceBuilder from "./utils/middleware-source-builder";
 import middlewareInjector from "./utils/middleware-injector";
-import {green} from "colors/safe";
+import changesTriggerer from "./utils/changes-triggerer";
 
 export default class ChromeExtensionReloader extends AbstractChromePluginReloader {
-    private _opts: PluginOptions;
-    private _source: string;
-    private _hash: string;
+    private _injector: Function;
+    private _triggerer: Function;
 
     constructor(options?: PluginOptions) {
         super();
-        this._hash = '';
-        this._opts = {reloadPage: true, port: 9090, ...options};
-        this._opts.entries = {contentScript: 'content-script', background: 'background', ...this._opts.entries};
+        const defaultEntries = {contentScript: 'content-script', background: 'background'};
+        const {reloadPage = true, port = 9090, entries = defaultEntries} = {...options};
 
-        this._source = middlewareSourceBuilder({
-            port: this._opts.port,
-            reloadPage: this._opts.reloadPage
+        const source = middlewareSourceBuilder({
+            port: port,
+            reloadPage: reloadPage
         });
+
+        this._injector = middlewareInjector(entries, source);
+        this._triggerer = changesTriggerer(reloadPage, port);
     }
 
     apply(compiler) {
-        const {port, reloadPage, entries} = this._opts;
-        compiler.plugin("compilation", compilation => middlewareInjector(entries, compilation, this._source));
-
-        console.info(green("[ Starting the Chrome Hot Plugin Reload Server... ]"));
-        const server = new HotReloaderServer(port);
-        server.listen();
-
-        compiler.plugin("after-emit", (comp, call) => {
-            if (this._hash !== comp.hash) {
-                this._hash = comp.hash;
-                server.signChange(reloadPage, call);
-            }
-            else {
-                call();
-            }
-        });
+        compiler.plugin("compilation", this._injector);
+        compiler.plugin("after-emit", this._triggerer);
     }
 }
