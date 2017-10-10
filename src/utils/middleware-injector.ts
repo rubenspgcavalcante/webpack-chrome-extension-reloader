@@ -1,9 +1,7 @@
 import {ConcatSource} from "webpack-sources";
 
-export default function middlewareInjector({background, contentScript}, compilation, source: string) {
-    const {assets} = compilation;
-
-    compilation.plugin('after-optimize-chunk-assets', chunks => chunks.forEach(({name, files}) => {
+export default ({background, contentScript}: EntriesOption, source: string) =>
+    (assets, chunks) => chunks.forEach(({name, files}) => {
         if (name === background || name === contentScript) {
             const [entryPoint] = files;
 
@@ -11,5 +9,4 @@ export default function middlewareInjector({background, contentScript}, compilat
                 assets[entryPoint] = new ConcatSource(source, assets[entryPoint]);
             }
         }
-    }));
-}
+    })

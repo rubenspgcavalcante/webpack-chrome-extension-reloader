@@ -1,5 +1,5 @@
-const webpack = require("webpack");
 const path = require("path");
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const pack = require("./package.json");
 
 const { production, development, test } = ["production", "development", "test"].reduce((acc, env) => {
@@ -7,7 +7,7 @@ const { production, development, test } = ["production", "development", "test"].
   return acc;
 }, {});
 
-module.exports = {
+module.exports = (env = { analyze: false }) => ({
   target: "node",
   entry: test({
     "tests": './specs/index.specs.ts'
@@ -21,7 +21,7 @@ module.exports = {
 
   },
   plugins: [
-    production(new webpack.optimize.UglifyJsPlugin())
+    env.analyze && production(new BundleAnalyzerPlugin({sourceMap: true}))
   ].filter((plugin) => !!plugin),
   externals: [Object.keys(pack.dependencies)],
   resolve: {
@@ -32,12 +32,8 @@ module.exports = {
   module: {
     rules: [{
       enforce: "pre",
-      test: /\.js$/,
-      loader: "source-map-loader"
-    }, {
-      enforce: "pre",
       test: /\.tsx?$/,
-      loaders: [{ loader: "source-map-loader" }, { loader: "tslint-loader", options: { configFile: "./tslint.json" } }]
+      loaders: [{ loader: "tslint-loader", options: { configFile: "./tslint.json" } }]
     }, {
       test: /\.jsx?$/,
       exclude: /node_modules/,
@@ -56,4 +52,4 @@ module.exports = {
       loaders: ["raw-loader"]
     }]
   }
-};
+});

@@ -17,15 +17,21 @@ export default class HotReloaderServer {
         });
     }
 
+    signChange(reloadPage: boolean): Promise<any> {
+        return new Promise((res, rej) => {
+            this._safeSignChange(reloadPage, res, rej);
+        });
+    }
+
     @debouncer(DEBOUNCING_FRAME)
     @fastReloadBlock(FAST_RELOAD_CALLS, FAST_RELOAD_WAIT)
-    signChange(reloadPage, done: Function) {
+    private _safeSignChange(reloadPage, onSuccess, onError) {
         try {
             this._sendMsg(signChange({reloadPage}));
-            done();
+            onSuccess();
         }
         catch (err) {
-            done(err);
+            onError(err);
         }
     }
 
