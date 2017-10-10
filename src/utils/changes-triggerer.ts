@@ -7,13 +7,11 @@ export default (reloadPage: boolean, serverPort: number) => {
     console.info(green("[ Starting the Chrome Hot Plugin Reload Server... ]"));
     server.listen();
 
-    return ({hash}, done) => {
+    return (hash) => {
         if (lastHash !== hash) {
             lastHash = hash;
-            server.signChange(reloadPage).then(done).catch(done)
+            return server.signChange(reloadPage)
         }
-        else {
-            done();
-        }
+        return Promise.reject("Same compilation hash");
     }
 }

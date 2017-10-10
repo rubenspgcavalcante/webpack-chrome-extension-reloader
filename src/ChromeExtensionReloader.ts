@@ -22,7 +22,11 @@ export default class ChromeExtensionReloader extends AbstractChromePluginReloade
     }
 
     apply(compiler) {
-        compiler.plugin("compilation", this._injector);
-        compiler.plugin("after-emit", this._triggerer);
+        compiler.plugin("compilation", (comp) =>
+            comp.plugin('after-optimize-chunk-assets',
+                (chunks) => this._injector(comp.assets, chunks)));
+
+        compiler.plugin("after-emit", (comp, done) =>
+            this._triggerer(comp.hash).then(done).catch(done));
     }
 }
