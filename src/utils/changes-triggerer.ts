@@ -10,7 +10,7 @@ export default (reloadPage: boolean, serverPort: number) => {
     return ({hash}, done) => {
         if (lastHash !== hash) {
             lastHash = hash;
-            server.signChange(reloadPage, done);
+            server.signChange(reloadPage).then(done).catch(done)
         }
         else {
             done();
