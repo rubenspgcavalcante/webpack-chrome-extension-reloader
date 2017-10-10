@@ -1,5 +1,5 @@
 const path = require("path");
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const pack = require("./package.json");
 
 const { production, development, test } = ["production", "development", "test"].reduce((acc, env) => {
@@ -9,9 +9,7 @@ const { production, development, test } = ["production", "development", "test"].
 
 module.exports = (env = { analyze: false }) => ({
   target: "node",
-  entry: test({
-    "tests": './specs/index.specs.ts'
-  }) || { "webpack-chrome-extension-reloader": './src/index.ts' },
+  entry: test({ "tests": "./specs/index.specs.ts" }) || { "webpack-chrome-extension-reloader": "./src/index.ts" },
   devtool: "source-map",
   output: {
     publicPath: ".",
@@ -21,13 +19,13 @@ module.exports = (env = { analyze: false }) => ({
 
   },
   plugins: [
-    env.analyze && production(new BundleAnalyzerPlugin({sourceMap: true}))
+    env.analyze && production(new BundleAnalyzerPlugin({ sourceMap: true }))
   ].filter((plugin) => !!plugin),
   externals: [Object.keys(pack.dependencies)],
   resolve: {
     modules: [path.resolve(__dirname, "src"), "node_modules"],
     mainFiles: ["index"],
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: [".ts", ".tsx", ".js"],
   },
   module: {
     rules: [{
