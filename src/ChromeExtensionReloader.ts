@@ -2,6 +2,7 @@ import AbstractChromePluginReloader from "./webpack/AbstractPlugin";
 import middlewareSourceBuilder from "./utils/middleware-source-builder";
 import middlewareInjector from "./utils/middleware-injector";
 import changesTriggerer from "./utils/changes-triggerer";
+import HotReloaderServer from "./utils/HotReloaderServer";
 
 export default class ChromeExtensionReloader extends AbstractChromePluginReloader {
     private _injector: Function;
@@ -18,7 +19,7 @@ export default class ChromeExtensionReloader extends AbstractChromePluginReloade
         });
 
         this._injector = middlewareInjector(entries, source);
-        this._triggerer = changesTriggerer(reloadPage, port);
+        this._triggerer = changesTriggerer(new HotReloaderServer(port), reloadPage);
     }
 
     apply(compiler) {
