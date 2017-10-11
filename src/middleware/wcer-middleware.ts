@@ -6,15 +6,15 @@
 /* -------------------------------------------------- */
 (function (chrome, window) {
     const signals: any = JSON.parse('<%= signals %>');
+    const config: any = JSON.parse('<%= config %>');
+
     const reloadPage: boolean = <'true' | 'false'>'<%= reloadPage %>' === "true";
     const wsHost = '<%= WSHost %>';
     const {SIGN_CHANGE, SIGN_RELOAD, SIGN_RELOADED, SIGN_LOG, SIGN_CONNECT} = signals;
+    const {RECONNECT_INTERVAL, SOCKET_ERR_CODE_REF} = config;
 
     const {runtime, tabs} = chrome;
     const manifest = runtime.getManifest();
-
-    const RECONNECT_INTERVAL = 2000;
-    const SOCKET_ERR_CODE_REF = 'https://tools.ietf.org/html/rfc6455#section-7.4.1';
 
     const formatter = (msg: string) => `[ WCER: ${msg} ]`;
     const logger = (msg, level = 'info') => console[level](formatter(msg));

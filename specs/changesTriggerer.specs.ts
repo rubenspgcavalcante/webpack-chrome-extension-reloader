@@ -18,7 +18,7 @@ describe("changesTriggerer", () => {
         assert.isOk(hotReloadServerMock.listen.calledOnce);
     });
 
-    it("Should trigger the hot reload server every time the compilation hash changes", () => {
+    it("Should only trigger the hot reload server when the compilation hash changes", () => {
         const triggerer = changesTriggerer(hotReloadServerMock, true);
         assert.equal(hotReloadServerMock.signChange.callCount, 0);
 

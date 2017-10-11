@@ -8,7 +8,7 @@ export default (server: HotReloaderServer, reloadPage: boolean) => {
     info("[ Starting the Chrome Hot Plugin Reload Server... ]");
     server.listen();
 
-    return (hash) => {
+    return (hash: string): Promise<any> => {
         if (lastHash !== hash) {
             lastHash = hash;
             return server.signChange(reloadPage)

@@ -26,7 +26,7 @@ export default class HotReloaderServer {
 
     @debouncer(DEBOUNCING_FRAME)
     @fastReloadBlock(FAST_RELOAD_CALLS, FAST_RELOAD_WAIT)
-    private _safeSignChange(reloadPage, onSuccess, onError) {
+    private _safeSignChange(reloadPage: boolean, onSuccess: Function, onError: Function) {
         try {
             this._sendMsg(signChange({reloadPage}));
             onSuccess();
