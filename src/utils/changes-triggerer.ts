@@ -1,17 +1,18 @@
 import HotReloaderServer from "./HotReloaderServer";
-import {green} from "colors/safe";
+import {SAME_COMPILATION_HASH_ERROR} from "../constants/errors.constants";
+import {info} from "./logger";
 
-export default (reloadPage: boolean, serverPort: number) => {
+export default (server: HotReloaderServer, reloadPage: boolean) => {
     let lastHash;
-    const server = new HotReloaderServer(serverPort);
-    console.info(green("[ Starting the Chrome Hot Plugin Reload Server... ]"));
+
+    info("[ Starting the Chrome Hot Plugin Reload Server... ]");
     server.listen();
 
-    return (hash) => {
+    return (hash: string): Promise<any> => {
         if (lastHash !== hash) {
             lastHash = hash;
             return server.signChange(reloadPage)
         }
-        return Promise.reject("Same compilation hash");
+        return Promise.reject(SAME_COMPILATION_HASH_ERROR);
     }
 }

@@ -1,4 +1,4 @@
-import {green, yellow} from "colors/safe";
+import {info, warn} from "../utils/logger";
 
 export default function FastReloadBlock(maxCalls: number, wait: number) {
 
@@ -16,12 +16,12 @@ export default function FastReloadBlock(maxCalls: number, wait: number) {
                 inWait = true;
 
                 let interval = wait / 1000;
-                console.warn(yellow(`Please wait ${interval} secs. for next reload to prevent your extension being blocked`));
-                const logInterval = setInterval(() => console.warn(yellow(`${--interval} ...`)), 1000);
+                warn(`Please wait ${interval} secs. for next reload to prevent your extension being blocked`);
+                const logInterval = setInterval(() => warn(`${--interval} ...`), 1000);
 
                 setTimeout(() => {
                     clearInterval(logInterval);
-                    console.info(green("Signing for reload now"));
+                    info("Signing for reload now");
                     originalMethod.apply(this, args);
                     inWait = false;
                 }, wait);
