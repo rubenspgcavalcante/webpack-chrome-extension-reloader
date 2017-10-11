@@ -9,6 +9,25 @@ declare type MiddlewareTemplateParams = { port: number, reloadPage: boolean };
 
 declare type LOG_LEVEL = 0 | 1 | 2 | 3 | 4 | 5;
 
+declare interface Source {
+    source();
+
+    size(): number;
+
+    map(options: object): void;
+
+    sourceAndMap(options: object): object;
+
+    node();
+
+    listNode();
+
+    updateHash(hash: string): void;
+}
+
+declare type SourceFactory = (concatSource:string, rootSource:string) => Source;
+declare type WebpackChunk = { files: string[], name: string };
+
 declare module '*.json' {
     const json: any;
     export = json;

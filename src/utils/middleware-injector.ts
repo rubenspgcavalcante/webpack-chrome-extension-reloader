@@ -1,13 +1,12 @@
-import {ConcatSource} from "webpack-sources";
-
-export default ({background, contentScript}: EntriesOption, source: string) =>
-    (assets, chunks) => chunks
+export default function middlewareInjector({background, contentScript}: EntriesOption, source: string, sourceFactory: SourceFactory) {
+    return (assets: object, chunks: WebpackChunk[]) => chunks
         .reduce((prev, {name, files}) => {
             if (name === background || name === contentScript) {
                 const [entryPoint] = files;
                 if (/\.js$/.test(entryPoint)) {
-                    prev[entryPoint] = new ConcatSource(source, assets[entryPoint]);
+                    prev[entryPoint] = sourceFactory(source, assets[entryPoint]);
                 }
             }
             return prev;
         }, {});
+}
