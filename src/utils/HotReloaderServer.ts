@@ -3,6 +3,7 @@ import {signChange} from "./signals";
 import debouncer from "../decorators/@debouncer";
 import fastReloadBlock from "../decorators/@fastReloadBlock";
 import {DEBOUNCING_FRAME, FAST_RELOAD_CALLS, FAST_RELOAD_WAIT} from "../constants/fast-reloading.constants";
+import {info} from "./logger";
 
 export default class HotReloaderServer {
     _server: Server;
@@ -13,7 +14,7 @@ export default class HotReloaderServer {
 
     listen() {
         this._server.on('connection', ws => {
-            ws.on('message', (data: string) => console.info(`Message from the client: ${JSON.parse(data).payload}`));
+            ws.on('message', (data: string) => info(`Message from the client: ${JSON.parse(data).payload}`));
         });
     }
 

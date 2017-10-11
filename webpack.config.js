@@ -16,7 +16,6 @@ module.exports = (env = { analyze: false }) => ({
     path: path.resolve(__dirname, "./dist"),
     filename: "[name].js",
     libraryTarget: "umd"
-
   },
   plugins: [
     env.analyze && production(new BundleAnalyzerPlugin({ sourceMap: true }))

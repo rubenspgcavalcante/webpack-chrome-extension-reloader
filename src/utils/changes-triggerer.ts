@@ -1,11 +1,11 @@
 import HotReloaderServer from "./HotReloaderServer";
-import {green} from "colors/safe";
 import {SAME_COMPILATION_HASH_ERROR} from "../constants/errors.constants";
+import {info} from "./logger";
 
 export default (server: HotReloaderServer, reloadPage: boolean) => {
     let lastHash;
-    
-    console.info(green("[ Starting the Chrome Hot Plugin Reload Server... ]"));
+
+    info("[ Starting the Chrome Hot Plugin Reload Server... ]");
     server.listen();
 
     return (hash) => {

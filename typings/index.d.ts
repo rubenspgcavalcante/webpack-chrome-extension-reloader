@@ -7,6 +7,8 @@ declare type EntriesOption = { background: string, contentScript: string };
 
 declare type MiddlewareTemplateParams = { port: number, reloadPage: boolean };
 
+declare type LOG_LEVEL = 0 | 1 | 2 | 3 | 4 | 5;
+
 declare module '*.json' {
     const json: any;
     export = json;
