@@ -13,7 +13,7 @@
     "test": "NODE_ENV=test webpack && mocha dist/tests.js",
     "watch": "NODE_ENV=development webpack --watch",
     "analyze": "NODE_ENV=production webpack --env.analyze",
-    "sample": "webpack --config sample/webpack.plugin.js --watch",
+    "sample": "NODE_ENV=development webpack --config sample/webpack.plugin.js --watch",
     "prepublish": "npm run build"
   },
   "author": "Rubens Pinheiro",

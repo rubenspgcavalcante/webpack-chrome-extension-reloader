@@ -16,10 +16,12 @@ module.exports = {
     libraryTarget: "umd"
   },
   plugins: [
-    new WebpackChromeReloaderPlugin(),
+    //We check the NODE_ENV for the "development" value to include the plugin
+    process.env.NODE_ENV === "development"? new WebpackChromeReloaderPlugin() : null,
+
     new ExtractTextPlugin({ filename: "style.css" }),
     new CopyWebpackPlugin([{ from: "./sample/plugin/manifest.json", flatten: true }])
-  ],
+  ].filter(plugin => !!plugin),
   module: {
     rules: [{
       test: /\.js?$/,
