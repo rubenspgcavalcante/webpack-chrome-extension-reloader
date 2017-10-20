@@ -18,13 +18,23 @@ trigger and finish the compilation, your extension is notified and then reloaded
 
 ## How to use
 
-Add `webpack-chrome-extension-reloader` to the plugins section of your webpack configuration file.
+Add `webpack-chrome-extension-reloader` to the plugins section of your webpack configuration file.  
+<small>Obs.: To include only in development mode you can use the "NODE_ENV" var: </small>
 ```js
 const ChromeExtensionReloader  = require('webpack-chrome-extension-reloader');
 
-plugins: [
-    new ChromeExtensionReloader() // ONLY USE IT IN DEVELOPMENT BUILD!
-]
+module.exports = {
+//...
+    plugins: [
+      //Only add this plugin to development builds!
+      process.env.NODE_ENV === "development"? new ChromeExtensionReloader() : null
+    ].filter(plugin => !!plugin) // This will remove all "null" values from the array
+    //...
+}
+```
+And then just run your webpack with this value
+```bash
+NODE_ENV=development webpack
 ```
 
 You can also set some options (the following are the default ones):

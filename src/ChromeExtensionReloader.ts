@@ -1,9 +1,11 @@
+import {merge} from "lodash";
 import {ConcatSource} from "webpack-sources";
 import AbstractChromePluginReloader from "./webpack/AbstractPlugin";
 import middlewareSourceBuilder from "./utils/middleware-source-builder";
 import middlewareInjector from "./utils/middleware-injector";
 import changesTriggerer from "./utils/changes-triggerer";
 import HotReloaderServer from "./utils/HotReloaderServer";
+import defaultOptions from "./utils/default-options";
 
 export default class ChromeExtensionReloader extends AbstractChromePluginReloader {
     private _injector: Function;
@@ -11,8 +13,7 @@ export default class ChromeExtensionReloader extends AbstractChromePluginReloade
 
     constructor(options?: PluginOptions) {
         super();
-        const defaultEntries = {contentScript: 'content-script', background: 'background'};
-        const {reloadPage = true, port = 9090, entries = defaultEntries} = {...options};
+        const {reloadPage, port, entries} = merge(defaultOptions, options);
 
         const sourceFactory = (...sources): Source => new ConcatSource(...sources);
         const source = middlewareSourceBuilder({
