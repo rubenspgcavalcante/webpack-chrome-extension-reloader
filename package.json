@@ -8,6 +8,7 @@
     "type": "git",
     "url": "git://github.com/rubenspgcavalcante/webpack-chrome-extension-reloader.git"
   },
+  "types": "./index.d.ts",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
     "test": "cross-env NODE_ENV=test webpack && mocha dist/tests.js",
@@ -30,6 +31,7 @@
     "hot-reload"
   ],
   "dependencies": {
+    "@types/webpack": "^3.0.13",
     "colors": "^1.1.2",
     "lodash": "^4.17.4",
     "webpack-sources": "^1.0.1",
@@ -45,7 +47,6 @@
     "@types/lodash": "^4.14.65",
     "@types/mocha": "^2.2.41",
     "@types/sinon": "^2.3.1",
-    "@types/webpack": "^3.0.13",
     "@types/ws": "^3.2.0",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
