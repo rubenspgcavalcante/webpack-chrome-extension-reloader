@@ -1,46 +1,55 @@
-import {OPEN, Server} from "ws";
-import {signChange} from "./signals";
+import { OPEN, Server } from "ws";
+import { signChange } from "./signals";
 import debouncer from "../decorators/@debouncer";
 import fastReloadBlock from "../decorators/@fastReloadBlock";
-import {DEBOUNCING_FRAME, FAST_RELOAD_CALLS, FAST_RELOAD_WAIT} from "../constants/fast-reloading.constants";
-import {info} from "./logger";
+import {
+  DEBOUNCING_FRAME,
+  FAST_RELOAD_CALLS,
+  FAST_RELOAD_WAIT
+} from "../constants/fast-reloading.constants";
+import { info } from "./logger";
 
 export default class HotReloaderServer {
-    _server: Server;
+  _server: Server;
 
-    constructor(port: number) {
-        this._server = new Server({port});
-    }
+  constructor(port: number) {
+    this._server = new Server({ port });
+  }
 
-    listen() {
-        this._server.on('connection', ws => {
-            ws.on('message', (data: string) => info(`Message from the client: ${JSON.parse(data).payload}`));
-        });
-    }
+  listen() {
+    this._server.on("connection", ws => {
+      ws.on("message", (data: string) =>
+        info(`Message from the client: ${JSON.parse(data).payload}`)
+      );
+    });
+  }
 
-    signChange(reloadPage: boolean): Promise<any> {
-        return new Promise((res, rej) => {
-            this._safeSignChange(reloadPage, res, rej);
-        });
-    }
+  signChange(reloadPage: boolean): Promise<any> {
+    return new Promise((res, rej) => {
+      this._safeSignChange(reloadPage, res, rej);
+    });
+  }
 
-    @debouncer(DEBOUNCING_FRAME)
-    @fastReloadBlock(FAST_RELOAD_CALLS, FAST_RELOAD_WAIT)
-    private _safeSignChange(reloadPage: boolean, onSuccess: Function, onError: Function) {
-        try {
-            this._sendMsg(signChange({reloadPage}));
-            onSuccess();
-        }
-        catch (err) {
-            onError(err);
-        }
+  @debouncer(DEBOUNCING_FRAME)
+  @fastReloadBlock(FAST_RELOAD_CALLS, FAST_RELOAD_WAIT)
+  private _safeSignChange(
+    reloadPage: boolean,
+    onSuccess: Function,
+    onError: Function
+  ) {
+    try {
+      this._sendMsg(signChange({ reloadPage }));
+      onSuccess();
+    } catch (err) {
+      onError(err);
     }
+  }
 
-    private _sendMsg(msg: any) {
-        this._server.clients.forEach(client => {
-            if (client.readyState === OPEN) {
-                client.send(JSON.stringify(msg));
-            }
-        });
-    }
+  private _sendMsg(msg: any) {
+    this._server.clients.forEach(client => {
+      if (client.readyState === OPEN) {
+        client.send(JSON.stringify(msg));
+      }
+    });
+  }
 }

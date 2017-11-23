@@ -16,7 +16,7 @@
     "analyze": "NODE_ENV=production webpack --env.analyze",
     "sample": "NODE_ENV=development webpack --config sample/webpack.plugin.js --watch",
     "prepublish": "npm run build",
-    "auto-format": "prettier --write \"src/**/*.js\"",
+    "auto-format": "prettier --write \"src/**/*.ts\"",
     "precomit": "npm auto-format",
     "prepush": "npm test"
   },
