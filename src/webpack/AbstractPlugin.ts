@@ -1,9 +1,9 @@
-import {Plugin} from "webpack";
+import { Plugin } from "webpack";
 
 abstract class AbstractChromePluginReloader implements Plugin {
-    context: any;
+  context: any;
 
-    abstract apply(options?: any);
+  abstract apply(options?: any);
 }
 
 export default AbstractChromePluginReloader;
