@@ -17,7 +17,6 @@ trigger and finish the compilation, your extension is notified and then reloaded
 [Hot reloading Chrome extensions using Webpack](https://medium.com/front-end-hacking/hot-reloading-extensions-using-webpack-cdfa0e4d5a08) for more background.
 
 ## How to use
-
 Add `webpack-chrome-extension-reloader` to the plugins section of your webpack configuration file.
 ```js
 const ChromeExtensionReloader  = require('webpack-chrome-extension-reloader');
@@ -45,6 +44,9 @@ plugins: [
     })
 ]
 ```
+
+### Contributing
+Please before opening any **issue** or **pull request** check the [contribution guide](/.github/CONTRIBUTING.MD).
 
 ### Building and Testing
 Inside this repository have an example plugin, so you can test and see it working
