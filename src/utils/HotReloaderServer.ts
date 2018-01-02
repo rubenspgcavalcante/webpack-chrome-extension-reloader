@@ -21,6 +21,9 @@ export default class HotReloaderServer {
       ws.on("message", (data: string) =>
         info(`Message from the client: ${JSON.parse(data).payload}`)
       );
+      ws.on("error", () => {
+        // NOOP - swallow socket errors due to http://git.io/vbhSN
+      });
     });
   }
 
