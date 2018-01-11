@@ -1,6 +1,6 @@
 {
   "name": "webpack-chrome-extension-reloader",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "private": false,
   "description": "Watch for changes and force the reload of the chrome extension",
   "main": "dist/webpack-chrome-extension-reloader.js",
