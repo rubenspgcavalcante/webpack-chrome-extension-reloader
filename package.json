@@ -12,7 +12,7 @@
   "scripts": {
     "build": "NODE_ENV=production webpack",
     "test": "NODE_ENV=test webpack && mocha dist/tests.js",
-    "watch": "NODE_ENV=development webpack-dashboard -- webpack --watch",
+    "watch": "NODE_ENV=development webpack --watch",
     "analyze": "NODE_ENV=production webpack --env.analyze",
     "sample": "NODE_ENV=development webpack --config sample/webpack.plugin.js --watch",
     "prepublish": "npm run build",
@@ -79,7 +79,6 @@
     "tslint-loader": "^3.4.2",
     "typescript": "^2.1.5",
     "webpack": "^3.6.0",
-    "webpack-bundle-analyzer": "^2.9.0",
-    "webpack-dashboard": "^1.0.2"
+    "webpack-bundle-analyzer": "^2.9.0"
   }
 }

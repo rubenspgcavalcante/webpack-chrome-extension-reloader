@@ -20,6 +20,7 @@ module.exports = {
     process.env.NODE_ENV === "development"? new WebpackChromeReloaderPlugin() : null,
 
     new ExtractTextPlugin({ filename: "style.css" }),
+    new CopyWebpackPlugin([{ from: "./sample/plugin/some-asset.txt", flatten: true }]),
     new CopyWebpackPlugin([{ from: "./sample/plugin/manifest.json", flatten: true }])
   ].filter(plugin => !!plugin),
   module: {
