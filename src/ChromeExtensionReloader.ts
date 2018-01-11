@@ -36,7 +36,7 @@ export default class ChromeExtensionReloader extends AbstractChromePluginReloade
       );
 
       compiler.plugin("after-emit", (comp, done) =>
-        this._triggerer(comp.hash)
+        this._triggerer()
           .then(done)
           .catch(done)
       );
