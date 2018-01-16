@@ -45,6 +45,14 @@ plugins: [
 ]
 ```
 
+And then just run your application with Webpack in watch mode:
+```bash
+NODE_ENV=development webpack --config myconfig.js --watch
+```
+
+Every time webpack triggers a compilation, the extension reloader are going to do the hot reload :)  
+**Note:** the plugin only works on **development** mode, so don't forget to set the NODE_ENV before run the command above
+
 ### Contributing
 Please before opening any **issue** or **pull request** check the [contribution guide](/.github/CONTRIBUTING.MD).
 
