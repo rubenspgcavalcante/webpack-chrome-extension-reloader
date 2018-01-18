@@ -26,6 +26,7 @@
     "typings/index.d.ts"
   ],
   "include": [
+    "client/**/*",
     "src/**/*",
     "specs/**/*"
   ],

@@ -4,6 +4,9 @@
   "private": false,
   "description": "Watch for changes and force the reload of the chrome extension",
   "main": "dist/webpack-chrome-extension-reloader.js",
+  "bin": {
+    "wcer": "./dist/wcer.js"
+  },
   "types": "typings/index.d.ts",
   "repository": {
     "type": "git",
@@ -16,7 +19,7 @@
     "analyze": "NODE_ENV=production webpack --env.analyze",
     "sample": "NODE_ENV=development webpack --config sample/webpack.plugin.js --watch",
     "prepublish": "npm run build",
-    "auto-format": "prettier --write \"src/**/*.ts\"",
+    "auto-format": "prettier --write \"{src,client}/**/*.ts\"",
     "precomit": "npm auto-format",
     "prepush": "npm test"
   },
@@ -36,6 +39,7 @@
   "dependencies": {
     "colors": "^1.1.2",
     "lodash": "^4.17.4",
+    "minimist": "^1.2.0",
     "webpack-sources": "^1.0.1",
     "ws": "^3.3.3"
   },
@@ -47,6 +51,7 @@
     "@types/chrome": "^0.0.49",
     "@types/colors": "^1.1.3",
     "@types/lodash": "^4.14.65",
+    "@types/minimist": "^1.2.0",
     "@types/mocha": "^2.2.41",
     "@types/sinon": "^2.3.1",
     "@types/webpack": "^3.0.13",
@@ -59,7 +64,6 @@
     "babel-plugin-transform-object-rest-spread": "^6.22.0",
     "babel-plugin-transform-regenerator": "^6.22.0",
     "babel-polyfill": "^6.22.0",
-    "babel-preset-env": "^1.5.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.22.0",
     "chai": "^4.0.2",
@@ -78,7 +82,7 @@
     "tslint": "^4.5.1",
     "tslint-loader": "^3.4.2",
     "typescript": "^2.1.5",
-    "webpack": "^3.6.0",
+    "webpack": "^3.10.0",
     "webpack-bundle-analyzer": "^2.9.0"
   }
 }
