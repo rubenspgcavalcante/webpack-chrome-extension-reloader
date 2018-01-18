@@ -10,40 +10,40 @@ declare type MiddlewareTemplateParams = { port: number, reloadPage: boolean };
 declare type LOG_LEVEL = 0 | 1 | 2 | 3 | 4 | 5;
 
 declare interface Source {
-    source();
+  source();
 
-    size(): number;
+  size(): number;
 
-    map(options: object): void;
+  map(options: object): void;
 
-    sourceAndMap(options: object): object;
+  sourceAndMap(options: object): object;
 
-    node();
+  node();
 
-    listNode();
+  listNode();
 
-    updateHash(hash: string): void;
+  updateHash(hash: string): void;
 }
 
-declare type SourceFactory = (concatSource:string, rootSource:string) => Source;
+declare type SourceFactory = (concatSource: string, rootSource: string) => Source;
 declare type WebpackChunk = { files: string[], name: string };
 
 declare module '*.json' {
-    const json: any;
-    export = json;
+  const json: any;
+  export = json;
 }
 
 declare module '*.txt' {
-    const text: string;
-    export = text;
+  const text: string;
+  export = text;
 }
 
 declare module "*.source.ts" {
-    const sourceCode: string;
-    export = sourceCode;
+  const sourceCode: string;
+  export = sourceCode;
 }
 
 declare module "raw-loader*" {
-    const rawText: string;
-    export = rawText;
+  const rawText: string;
+  export = rawText;
 }

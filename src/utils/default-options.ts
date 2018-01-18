@@ -1,8 +1,15 @@
+import {
+  DEFAULT_BACKGROUND_ENTRY,
+  DEFAULT_CONTENT_SCRIPT_ENTRY,
+  DEFAULT_PORT,
+  DEFAULT_RELOAD_PAGE
+} from "../constants/options.constants";
+
 export default {
-  reloadPage: true,
-  port: 9090,
+  reloadPage: DEFAULT_RELOAD_PAGE,
+  port: DEFAULT_PORT,
   entries: {
-    contentScript: "content-script",
-    background: "background"
+    contentScript: DEFAULT_CONTENT_SCRIPT_ENTRY,
+    background: DEFAULT_BACKGROUND_ENTRY
   }
 };

@@ -17,6 +17,7 @@ trigger and finish the compilation, your extension is notified and then reloaded
 [Hot reloading Chrome extensions using Webpack](https://medium.com/front-end-hacking/hot-reloading-extensions-using-webpack-cdfa0e4d5a08) for more background.
 
 ## How to use
+#Using as a plugin
 Add `webpack-chrome-extension-reloader` to the plugins section of your webpack configuration file.
 ```js
 const ChromeExtensionReloader  = require('webpack-chrome-extension-reloader');
@@ -49,6 +50,26 @@ And then just run your application with Webpack in watch mode:
 ```bash
 NODE_ENV=development webpack --config myconfig.js --watch
 ```
+
+#Using the CLI (still in Beta)
+If you don't want all the plugin setup, you can just use the client that comes with the package:
+```bash
+wcer
+```
+If you run directly, it will use the  default configurations, but if you want to customize
+you can call it with the following options:
+```bash
+wcer --config wb.config.js --port 9080 --no-page-reload content-script my-content.js background bg.js 
+```
+### Client options
+
+|        name        |    default        |                               description                         |
+|--------------------|-------------------|-------------------------------------------------------------------|
+| --config           | webpack.config.js | The webpack configuration file path                               |
+| --port             | 9090              | The port to run the server                                        |
+| --content-script   | content-script    | The **entry** name for the content script                         |
+| --background       | background        | The **entry** name for the background script                      |
+| --no-page-reload   |                   | Disable the auto reloading of all **pages** which runs the plugin |
 
 Every time webpack triggers a compilation, the extension reloader are going to do the hot reload :)  
 **Note:** the plugin only works on **development** mode, so don't forget to set the NODE_ENV before run the command above
