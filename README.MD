@@ -17,7 +17,7 @@ trigger and finish the compilation, your extension is notified and then reloaded
 [Hot reloading Chrome extensions using Webpack](https://medium.com/front-end-hacking/hot-reloading-extensions-using-webpack-cdfa0e4d5a08) for more background.
 
 ## How to use
-#Using as a plugin
+### Using as a plugin
 Add `webpack-chrome-extension-reloader` to the plugins section of your webpack configuration file.
 ```js
 const ChromeExtensionReloader  = require('webpack-chrome-extension-reloader');
@@ -51,7 +51,7 @@ And then just run your application with Webpack in watch mode:
 NODE_ENV=development webpack --config myconfig.js --watch
 ```
 
-#Using the CLI (still in Beta)
+### Using the CLI (still in Beta)
 If you don't want all the plugin setup, you can just use the client that comes with the package:
 ```bash
 wcer
