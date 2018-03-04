@@ -44,7 +44,7 @@
     "ws": "^3.3.3"
   },
   "peerDependencies": {
-    "webpack": "2 | 3"
+    "webpack": "2 | 3 | 4"
   },
   "devDependencies": {
     "@types/chai": "^4.0.0",
