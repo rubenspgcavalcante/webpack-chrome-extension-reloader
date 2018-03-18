@@ -38,9 +38,10 @@ plugins: [
     new ChromeExtensionReloader({
       port: 9090, // Which port use to create the server
       reloadPage: true, // Force the reload of the page also
-      entries: { //The entries used for the content/background scripts
-        contentScript: 'content-script', //Use the entry names, not the file name or the path
-        background: 'background'
+      entries: { // The entries used for the content/background scripts
+        contentScript: 'content-script', // Use the entry names, not the file name or the path
+        background: 'background',
+        extra: [] // Additional entry names
       }
     })
 ]
@@ -59,7 +60,7 @@ wcer
 If you run directly, it will use the  default configurations, but if you want to customize
 you can call it with the following options:
 ```bash
-wcer --config wb.config.js --port 9080 --no-page-reload content-script my-content.js --background bg.js 
+wcer --config wb.config.js --port 9080 --no-page-reload --content-script my-content --background bg --extra-entries extra-a;extra-b
 ```
 ### Client options
 
@@ -69,6 +70,7 @@ wcer --config wb.config.js --port 9080 --no-page-reload content-script my-conten
 | --port             | 9090              | The port to run the server                                        |
 | --content-script   | content-script    | The **entry** name for the content script                         |
 | --background       | background        | The **entry** name for the background script                      |
+| --extra-entries    |                   | Additional **entry** names split by ;                             |
 | --no-page-reload   |                   | Disable the auto reloading of all **pages** which runs the plugin |
 
 Every time webpack triggers a compilation, the extension reloader are going to do the hot reload :)  
