@@ -12,12 +12,14 @@ describe("middleware-injector", () => {
 
   const entriesInfo = {
     background: {name: "bgChunkName", path: "./path/to/bg-script.js"},
-    contentScript: {name: "contentChunkName", path: "./path/to/content-script.js"}
+    contentScript: {name: "contentChunkName", path: "./path/to/content-script.js"},
+    extraEntry: {name: "extraChunkName", path: "./path/to/extra-script.js"}
   };
 
   const options: EntriesOption = {
     background: entriesInfo.background.name,
-    contentScript: entriesInfo.contentScript.name
+    contentScript: entriesInfo.contentScript.name,
+    extra: [entriesInfo.extraEntry.name]
   };
 
   const fakeCssPath = "./path/to/some.css";
@@ -26,6 +28,7 @@ describe("middleware-injector", () => {
   const assets = {
     [entriesInfo.background.path]: {source: () => "const bg = true;"},
     [entriesInfo.contentScript.path]: {source: () => "const cs = true;"},
+    [entriesInfo.extraEntry.path]: {source: () => "const extra = true;"},
     [fakeCssPath]: {source: () => "some-css-source"},
     [fakeImgPath]: {source: () => "some-base64-source"}
   };
@@ -36,11 +39,12 @@ describe("middleware-injector", () => {
     chunks = [
       {name: options.background, files: [entriesInfo.background.path]},
       {name: options.contentScript, files: [entriesInfo.contentScript.path, fakeCssPath]},
+      ...options.extra.map(entry => ({name: entry, files: [entriesInfo.extraEntry.path]})),
       {name: "someOtherAsset", files: [fakeImgPath]}
     ];
   });
 
-  it("Should find the background and content script entries and inject the middleware source on them", () => {
+  it("Should find all entries and inject the middleware source on them", () => {
     const newAssets = assetsBuilder(assets, chunks, sourceFactory);
 
     const newBgSource = newAssets[entriesInfo.background.path].source();
@@ -50,6 +54,10 @@ describe("middleware-injector", () => {
     const newContentSource = newAssets[entriesInfo.contentScript.path].source();
     const oldContentSource = assets[entriesInfo.contentScript.path].source();
     assert.equal(newContentSource, (sourceCode + oldContentSource));
+    
+    const newExtraSource = newAssets[entriesInfo.extraEntry.path].source();
+    const oldExtraSource = assets[entriesInfo.extraEntry.path].source();
+    assert.equal(newExtraSource, (sourceCode + oldExtraSource));
   });
 
   it("Should return only changed assets", () => {

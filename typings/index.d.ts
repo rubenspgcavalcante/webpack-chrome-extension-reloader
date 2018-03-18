@@ -3,7 +3,7 @@ declare type Action = { type: ActionType, payload?: any };
 declare type ActionFactory = (payload?: any) => Action;
 
 declare type PluginOptions = { port: number, reloadPage: boolean, entries: EntriesOption };
-declare type EntriesOption = { background: string, contentScript: string };
+declare type EntriesOption = { background: string, contentScript: string, extra?: string[] };
 
 declare type MiddlewareTemplateParams = { port: number, reloadPage: boolean };
 

@@ -8,6 +8,7 @@ import {
   BACKGROUND_ENTRY,
   CONFIG,
   CONTENT_SCRIPT_ENTRY,
+  EXTRA_ENTRIES,
   NO_PAGE_RELOAD,
   PORT
 } from "./args.constant";
@@ -15,6 +16,7 @@ import {
   DEFAULT_BACKGROUND_ENTRY,
   DEFAULT_CONFIG,
   DEFAULT_CONTENT_SCRIPT_ENTRY,
+  DEFAULT_EXTRA_ENTRIES,
   DEFAULT_PORT
 } from "../src/constants/options.constants";
 
@@ -27,11 +29,14 @@ const port = params[PORT] || DEFAULT_PORT;
 const contentScript =
   params[CONTENT_SCRIPT_ENTRY] || DEFAULT_CONTENT_SCRIPT_ENTRY;
 const background = params[BACKGROUND_ENTRY] || DEFAULT_BACKGROUND_ENTRY;
+const extraEntries =
+  (params[EXTRA_ENTRIES] && params[EXTRA_ENTRIES].split(";")) ||
+  DEFAULT_EXTRA_ENTRIES;
 
 const pluginOptions: PluginOptions = {
   port,
   reloadPage: !params[NO_PAGE_RELOAD],
-  entries: { contentScript, background }
+  entries: { contentScript, background, extra: extraEntries }
 };
 
 const optPath = resolve(cwd(), config);
