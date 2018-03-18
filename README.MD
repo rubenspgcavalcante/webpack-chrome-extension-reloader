@@ -60,7 +60,7 @@ wcer
 If you run directly, it will use the  default configurations, but if you want to customize
 you can call it with the following options:
 ```bash
-wcer --config wb.config.js --port 9080 --no-page-reload content-script my-content.js --background bg.js --extra-entries extra-a;extra-b
+wcer --config wb.config.js --port 9080 --no-page-reload --content-script my-content --background bg --extra-entries extra-a;extra-b
 ```
 ### Client options
 
