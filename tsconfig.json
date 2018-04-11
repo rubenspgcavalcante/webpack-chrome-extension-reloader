@@ -14,6 +14,9 @@
       "node",
       "mocha",
       "chrome"
+    ],
+    "lib": [
+      "es7"
     ]
   },
   "presets": [
