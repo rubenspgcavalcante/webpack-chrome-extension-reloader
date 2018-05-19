@@ -13,13 +13,15 @@ export default class ChromeExtensionReloader extends AbstractChromePluginReloade
 
   constructor(options?: PluginOptions) {
     super();
-    const { reloadPage, port, entries } = merge(defaultOptions, options);
+    if(process.env.NODE_ENV === "production") {
+      const { reloadPage, port, entries } = merge(defaultOptions, options);
 
-    const sourceFactory = (...sources): Source => new ConcatSource(...sources);
-    const source = middlewareSourceBuilder({ port, reloadPage });
+      const sourceFactory = (...sources): Source => new ConcatSource(...sources);
+      const source = middlewareSourceBuilder({ port, reloadPage });
 
-    this._injector = middlewareInjector(entries, source, sourceFactory);
-    this._triggerer = changesTriggerer(new HotReloaderServer(port), reloadPage);
+      this._injector = middlewareInjector(entries, source, sourceFactory);
+      this._triggerer = changesTriggerer(new HotReloaderServer(port), reloadPage);
+    }
   }
 
   apply(compiler) {
