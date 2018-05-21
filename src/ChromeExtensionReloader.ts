@@ -13,7 +13,7 @@ export default class ChromeExtensionReloader extends AbstractChromePluginReloade
 
   constructor(options?: PluginOptions) {
     super();
-    if(process.env.NODE_ENV === "production") {
+    if(process.env.NODE_ENV !== "production") {
       const { reloadPage, port, entries } = merge(defaultOptions, options);
 
       const sourceFactory = (...sources): Source => new ConcatSource(...sources);
