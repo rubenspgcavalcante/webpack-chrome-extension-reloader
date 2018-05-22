@@ -24,10 +24,12 @@ const { _, ...params } = minimist(process.argv.slice(2));
 
 const config = params[CONFIG] || DEFAULT_CONFIG;
 const port = params[PORT] || DEFAULT_PORT;
-const contentScript =
-  params[CONTENT_SCRIPT_ENTRY] || DEFAULT_CONTENT_SCRIPT_ENTRY;
-const background = params[BACKGROUND_ENTRY] || DEFAULT_BACKGROUND_ENTRY;
+const contentArg = params[CONTENT_SCRIPT_ENTRY] || DEFAULT_CONTENT_SCRIPT_ENTRY;
+const contentScript = contentArg.includes(",")
+  ? contentArg.split(",")
+  : contentArg;
 
+const background = params[BACKGROUND_ENTRY] || DEFAULT_BACKGROUND_ENTRY;
 const pluginOptions: PluginOptions = {
   port,
   reloadPage: !params[NO_PAGE_RELOAD],
