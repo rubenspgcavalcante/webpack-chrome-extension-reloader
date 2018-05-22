@@ -51,6 +51,29 @@ And then just run your application with Webpack in watch mode:
 NODE_ENV=development webpack --config myconfig.js --watch
 ```
 
+### Multiple Content Script support
+If you use more than one content script in your extension, like:
+```js
+entry: {
+    'my-first-content-script': './my-first-content-script.js',
+    'my-second-content-script': './my-second-content-script.js',
+    // and so on ...
+    background: './my-background-script.js'
+}
+```
+
+You can use the `entries.contentScript` options as an array:
+```js
+plugins: [
+    new ChromeExtensionReloader({
+      entries: { 
+        contentScript: ['my-first-content-script', 'my-second-content-script', /* and so on ... */],
+        background: 'background'
+      }
+    })
+]
+```
+
 ### Using the CLI (still in Beta)
 If you don't want all the plugin setup, you can just use the client that comes with the package:
 ```bash
@@ -59,15 +82,20 @@ wcer
 If you run directly, it will use the  default configurations, but if you want to customize
 you can call it with the following options:
 ```bash
-wcer --config wb.config.js --port 9080 --no-page-reload content-script my-content.js --background bg.js 
+wcer --config wb.config.js --port 9080 --no-page-reload --content-script my-content.js --background bg.js 
 ```
+If you have **multiple** content scripts, just use comma (with no spaces) while passing the option
+```bash
+wcer --content-script my-first-content.js,my-second-content.js,my-third-content.js 
+```
+
 ### Client options
 
 |        name        |    default        |                               description                         |
 |--------------------|-------------------|-------------------------------------------------------------------|
 | --config           | webpack.config.js | The webpack configuration file path                               |
 | --port             | 9090              | The port to run the server                                        |
-| --content-script   | content-script    | The **entry** name for the content script                         |
+| --content-script   | content-script    | The **entry/entries** name(s) for the content script(s)           |
 | --background       | background        | The **entry** name for the background script                      |
 | --no-page-reload   |                   | Disable the auto reloading of all **pages** which runs the plugin |
 

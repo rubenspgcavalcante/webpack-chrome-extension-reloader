@@ -2,7 +2,7 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
-    "target": "es6",
+    "target": "es2016",
     "sourceMap": true,
     "module": "commonjs",
     "moduleResolution": "node",
