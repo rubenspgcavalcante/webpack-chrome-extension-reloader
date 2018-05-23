@@ -4,7 +4,7 @@ declare type ActionFactory = (payload?: any) => Action;
 
 declare type PluginOptions = { port: number, reloadPage: boolean, entries: EntriesOption };
 declare type EntriesOption = { background: string, contentScript: ContentScriptOption };
-declare type ContentScriptOption = string|Array<string>;
+declare type ContentScriptOption = string | Array<string>;
 
 declare type MiddlewareTemplateParams = { port: number, reloadPage: boolean };
 
@@ -28,6 +28,8 @@ declare interface Source {
 
 declare type SourceFactory = (concatSource: string, rootSource: string) => Source;
 declare type WebpackChunk = { files: Array<string>, name: string };
+
+declare type ClientEvent = { type: string, payload: any };
 
 declare module '*.json' {
   const json: any;
