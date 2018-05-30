@@ -37,7 +37,7 @@ const pluginOptions: PluginOptions = {
 };
 
 const optPath = resolve(cwd(), config);
-let opts = {};
+let opts: webpack.Configuration | Function = {};
 
 try {
   // tslint:disable-next-line:no-eval

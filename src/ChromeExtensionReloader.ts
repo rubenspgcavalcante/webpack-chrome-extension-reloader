@@ -28,20 +28,19 @@ export default class ChromeExtensionReloader extends AbstractChromePluginReloade
     }
   }
 
-  apply(compiler) {
+  apply(compiler: any) {
+    let extensionName = "chrome-extension-reloader";
     if (process.env.NODE_ENV !== "production") {
-      compiler.plugin("compilation", comp =>
-        comp.plugin(
-          "after-optimize-chunk-assets",
-          chunks =>
-            (comp.assets = {
-              ...comp.assets,
-              ...this._injector(comp.assets, chunks)
-            })
+      compiler.hooks.compilation.tap(extensionName, comp =>
+        comp.hooks.afterOptimizeChunkAssets.tap(extensionName, chunks =>
+          (comp.assets = {
+            ...comp.assets,
+            ...this._injector(comp.assets, chunks)
+          })
         )
       );
 
-      compiler.plugin("after-emit", (comp, done) =>
+      compiler.hooks.afterEmit.tap(extensionName, (comp, done) =>
         this._triggerer()
           .then(done)
           .catch(done)
