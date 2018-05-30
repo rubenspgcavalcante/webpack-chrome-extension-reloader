@@ -93,6 +93,7 @@ wcer --content-script my-first-content.js,my-second-content.js,my-third-content.
 
 |        name        |    default        |                               description                         |
 |--------------------|-------------------|-------------------------------------------------------------------|
+| --help             |                   | Shows this help                                                   |
 | --config           | webpack.config.js | The webpack configuration file path                               |
 | --port             | 9090              | The port to run the server                                        |
 | --content-script   | content-script    | The **entry/entries** name(s) for the content script(s)           |
