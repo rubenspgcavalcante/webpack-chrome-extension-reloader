@@ -1,11 +1,14 @@
 import * as webpack from "webpack";
-import { Options } from "webpack";
+import { Configuration } from "webpack";
 import ChromeExtensionReloader from "../src/ChromeExtensionReloader";
 
 export default class ExtensionCompiler {
   private compiler;
 
-  constructor(config: Options.WatchOptions, pluginOptions: PluginOptions) {
+  constructor(
+    config: (env: string, args: Array<any>) => Configuration | Configuration,
+    pluginOptions: PluginOptions
+  ) {
     this.compiler = webpack(
       typeof config === "function" ? config(process.env, process.argv) : config
     );

@@ -6,10 +6,12 @@ import middlewareInjector from "./utils/middleware-injector";
 import changesTriggerer from "./utils/changes-triggerer";
 import HotReloaderServer from "./utils/HotReloaderServer";
 import defaultOptions from "./utils/default-options";
+import CompilerEventsFacade from "./utils/CompilerEventsFacade";
 
 export default class ChromeExtensionReloader extends AbstractChromePluginReloader {
   private _injector: Function;
   private _triggerer: Function;
+  private _eventAPI: CompilerEventsFacade;
 
   constructor(options?: PluginOptions) {
     super();
@@ -29,18 +31,18 @@ export default class ChromeExtensionReloader extends AbstractChromePluginReloade
   }
 
   apply(compiler: any) {
-    let extensionName = "chrome-extension-reloader";
+    this._eventAPI = new CompilerEventsFacade(compiler);
+
     if (process.env.NODE_ENV !== "production") {
-      compiler.hooks.compilation.tap(extensionName, comp =>
-        comp.hooks.afterOptimizeChunkAssets.tap(extensionName, chunks =>
+      this._eventAPI.afterOptmizeChunkAssets(
+        (comp, chunks) =>
           (comp.assets = {
             ...comp.assets,
             ...this._injector(comp.assets, chunks)
           })
-        )
       );
 
-      compiler.hooks.afterEmit.tap(extensionName, (comp, done) =>
+      this._eventAPI.afterEmit((comp, done) =>
         this._triggerer()
           .then(done)
           .catch(done)
