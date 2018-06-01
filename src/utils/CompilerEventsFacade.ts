@@ -8,7 +8,7 @@ export default class CompilerEventsFacade {
     this._legacyTapable = !compiler.hooks;
   }
 
-  afterOptmizeChunkAssets(call: Function) {
+  afterOptimizeChunkAssets(call: Function) {
     return this._legacyTapable
       ? this._compiler.plugin("compilation", comp =>
           comp.plugin("after-optimize-chunk-assets", chunks =>
@@ -18,7 +18,7 @@ export default class CompilerEventsFacade {
       : this._compiler.hooks.compilation.tap(
           CompilerEventsFacade.extensionName,
           comp =>
-            comp.hooks.afterOptmizeChunkAssets(
+            comp.hooks.afterOptimizeChunkAssets.tap(
               CompilerEventsFacade.extensionName,
               chunks => call(comp, chunks)
             )
@@ -28,6 +28,9 @@ export default class CompilerEventsFacade {
   afterEmit(call: Function) {
     return this._legacyTapable
       ? this._compiler.plugin("after-emit", call)
-      : this._compiler.hooks.afterEmit(CompilerEventsFacade.extensionName);
+      : this._compiler.hooks.afterEmit.tap(
+          CompilerEventsFacade.extensionName,
+          call
+        );
   }
 }

@@ -34,7 +34,7 @@ export default class ChromeExtensionReloader extends AbstractChromePluginReloade
     this._eventAPI = new CompilerEventsFacade(compiler);
 
     if (process.env.NODE_ENV !== "production") {
-      this._eventAPI.afterOptmizeChunkAssets(
+      this._eventAPI.afterOptimizeChunkAssets(
         (comp, chunks) =>
           (comp.assets = {
             ...comp.assets,
