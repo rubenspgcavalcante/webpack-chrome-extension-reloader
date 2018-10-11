@@ -1,9 +1,18 @@
 # Webpack Chrome Extension Reloader
+A Webpack plugin to enable hot reloading while developing Chrome extensions.
+
+<div align="center">
+  <a href="https://github.com/webpack/webpack">
+    <img width="200" height="200" src="https://webpack.js.org/assets/icon-square-big.svg">
+  </a>
+  <br>
+  <br>
+</div>
+  
 [![npm version](https://badge.fury.io/js/webpack-chrome-extension-reloader.svg)](https://badge.fury.io/js/webpack-chrome-extension-reloader)
 [![Build Status](https://travis-ci.org/rubenspgcavalcante/webpack-chrome-extension-reloader.svg?branch=master)](https://travis-ci.org/rubenspgcavalcante/webpack-chrome-extension-reloader)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b93aa8303bfb44a2a621cac57639ca26)](https://www.codacy.com/app/rubenspgcavalcante/webpack-chrome-extension-reloader?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rubenspgcavalcante/webpack-chrome-extension-reloader&amp;utm_campaign=Badge_Grade)
 
-A Webpack plugin to enable hot reloading while developing Chrome extensions.
 
 ## Solution for ...
 Have your ever being annoyed while developing a Google Chrome extension, and being unable to use
