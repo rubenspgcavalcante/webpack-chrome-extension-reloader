@@ -14,5 +14,9 @@ Tip: try to change the content of the console log within the `my-content-script`
 
 ## Why can't I load plugin-src/ dir?
 The source needs to be parsed and bundled by Webpack, then is outputed on the `dist` directory. This means
-you can't directly load the `plugin-src` directrory as a extension.
+you can't directly load this directory as a extension.
 The source in dist will contain the neccessary data to make the Hot Reloading work properly.
+
+# Manifest and Icons
+As both manifest.json and icons aren't directly processed on the extension source, it needs to be
+copied to the final output directory `dist/`.
