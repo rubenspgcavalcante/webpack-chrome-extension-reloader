@@ -33,13 +33,14 @@ export default class ChromeExtensionReloader extends AbstractChromePluginReloade
   apply(compiler: any) {
     this._eventAPI = new CompilerEventsFacade(compiler);
 
-    if (process.env.NODE_ENV !== "production") {
+    if (process.env.NODE_ENV === "development") {
       this._eventAPI.afterOptimizeChunkAssets(
-        (comp, chunks) =>
+        (comp, chunks) =>{
           (comp.assets = {
             ...comp.assets,
             ...this._injector(comp.assets, chunks)
           })
+        }
       );
 
       this._eventAPI.afterEmit((comp, done) =>
@@ -47,6 +48,9 @@ export default class ChromeExtensionReloader extends AbstractChromePluginReloade
           .then(done)
           .catch(done)
       );
+    }
+    else {
+      console.warn("Chrome Extension Reloader Plugin runs only on NODE_ENV=development");
     }
   }
 }

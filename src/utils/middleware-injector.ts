@@ -10,10 +10,12 @@ export default function middlewareInjector(
         name === contentScript ||
         contentScript.includes(name)
       ) {
-        const [entryPoint] = files;
-        if (/\.js$/.test(entryPoint)) {
-          prev[entryPoint] = sourceFactory(source, assets[entryPoint]);
-        }
+        files.forEach(entryPoint => {
+          if (/\.js$/.test(entryPoint)) {
+            console.log(entryPoint)
+            prev[entryPoint] = sourceFactory(source, assets[entryPoint]);
+          }
+        });
       }
       return prev;
     }, {});
