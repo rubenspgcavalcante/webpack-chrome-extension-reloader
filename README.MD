@@ -13,6 +13,17 @@ A Webpack plugin to enable hot reloading while developing Chrome extensions.
 [![Build Status](https://travis-ci.org/rubenspgcavalcante/webpack-chrome-extension-reloader.svg?branch=master)](https://travis-ci.org/rubenspgcavalcante/webpack-chrome-extension-reloader)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b93aa8303bfb44a2a621cac57639ca26)](https://www.codacy.com/app/rubenspgcavalcante/webpack-chrome-extension-reloader?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rubenspgcavalcante/webpack-chrome-extension-reloader&amp;utm_campaign=Badge_Grade)
 
+## Installing
+
+npm
+```
+npm install webpack-chrome-extension-reloader --save-dev
+```
+
+yarn 
+```
+yarn add webpack-chrome-extension-reloader --dev
+```
 
 ## Solution for ...
 Have your ever being annoyed while developing a Google Chrome extension, and being unable to use
@@ -62,6 +73,9 @@ And then just run your application with Webpack in watch mode:
 NODE_ENV=development webpack --config myconfig.js --watch
 ```
 
+**Important**: You need to run with `--watch`, as the plugin will be able to sign the extension 
+only if webpack triggers the rebuild.
+
 ### Multiple Content Script support
 If you use more than one content script in your extension, like:
 ```js
@@ -85,19 +99,21 @@ plugins: [
 ]
 ```
 
-### Using the CLI
-If you don't want all the plugin setup, you can just use the client that comes with the package:
+### CLI
+If you don't want all the plugin setup, you can just use the client that comes with the package.  
+You can use by intalling the package globably, or directly using `npx`
+
 ```bash
-wcer
+npx wcer
 ```
 If you run directly, it will use the  default configurations, but if you want to customize
 you can call it with the following options:
 ```bash
-wcer --config wb.config.js --port 9080 --no-page-reload --content-script my-content.js --background bg.js 
+npx wcer --config wb.config.js --port 9080 --no-page-reload --content-script my-content.js --background bg.js 
 ```
 If you have **multiple** content scripts, just use comma (with no spaces) while passing the option
 ```bash
-wcer --content-script my-first-content.js,my-second-content.js,my-third-content.js 
+npx wcer --content-script my-first-content.js,my-second-content.js,my-third-content.js 
 ```
 
 ### Client options
