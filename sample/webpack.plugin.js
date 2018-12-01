@@ -30,7 +30,7 @@ module.exports = {
       use: {
         loader: "babel-loader",
         options: {
-          presets: [require("babel-preset-es2015")]
+          presets: [require("@babel/preset-env")]
         }
       }
     }, {
