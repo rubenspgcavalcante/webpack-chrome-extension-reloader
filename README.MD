@@ -20,6 +20,8 @@ webpack-hot-server because it's not a web app but a browser extension?
 
 Well, now you can do hot reloading!
 
+![](.github/sample-gif.gif)
+
 ## What it does?
 Basically something similar to what the webpack hot reload middleware does. When you change the code and the webpack
 trigger and finish the compilation, your extension is notified and then reloaded using the chrome.runtime API.  Check out
@@ -83,7 +85,7 @@ plugins: [
 ]
 ```
 
-### Using the CLI (still in Beta)
+### Using the CLI
 If you don't want all the plugin setup, you can just use the client that comes with the package:
 ```bash
 wcer

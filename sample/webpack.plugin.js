@@ -1,13 +1,15 @@
 const { resolve } = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WebpackChromeReloaderPlugin = require("..");
 
+const mode = process.env.NODE_ENV;
 module.exports = {
-  devtool: "source-map",
+  mode,
+  devtool: "inline-source-map",
   entry: {
-    "content-script": "./sample/plugin/my-content-script.js",
-    "background": "./sample/plugin/my-background.js"
+    "content-script": "./sample/plugin-src/my-content-script.js",
+    background: "./sample/plugin-src/my-background.js"
   },
   output: {
     publicPath: ".",
@@ -16,30 +18,42 @@ module.exports = {
     libraryTarget: "umd"
   },
   plugins: [
-    //We check the NODE_ENV for the "development" value to include the plugin
-    process.env.NODE_ENV === "development"? new WebpackChromeReloaderPlugin() : null,
+    /***********************************************************************/
+    /* By default the plugin will work only when NODE_ENV is "development" */
+    /***********************************************************************/
+    new WebpackChromeReloaderPlugin(),
 
-    new ExtractTextPlugin({ filename: "style.css" }),
-    new CopyWebpackPlugin([{ from: "./sample/plugin/some-asset.txt", flatten: true }]),
-    new CopyWebpackPlugin([{ from: "./sample/plugin/manifest.json", flatten: true }])
-  ].filter(plugin => !!plugin),
+    new MiniCssExtractPlugin({ filename: "style.css" }),
+    new CopyWebpackPlugin([
+      { from: "./sample/manifest.json" },
+      { from: "./sample/icons" }
+    ])
+  ],
   module: {
-    rules: [{
-      test: /\.js?$/,
-      exclude: /node_modules/,
-      use: {
-        loader: "babel-loader",
-        options: {
-          presets: [require("babel-preset-es2015")]
+    rules: [
+      {
+        test: /\.js?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [require("@babel/preset-env")]
+          }
         }
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          "css-loader"
+        ]
+      },
+      {
+        test: /\.txt$/,
+        use: "raw-loader"
       }
-    }, {
-      test: /\.css$/,
-      exclude: /node_modules/,
-      use: ExtractTextPlugin.extract({
-        fallback: "style-loader",
-        use: "css-loader",
-      }),
-    }]
+    ]
   }
 };
