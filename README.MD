@@ -85,7 +85,7 @@ plugins: [
 ]
 ```
 
-### Using the CLI (still in Beta)
+### Using the CLI
 If you don't want all the plugin setup, you can just use the client that comes with the package:
 ```bash
 wcer

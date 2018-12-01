@@ -25,7 +25,8 @@ module.exports = {
 
     new MiniCssExtractPlugin({ filename: "style.css" }),
     new CopyWebpackPlugin([
-      { from: "./sample/plugin-src/manifest.json", flatten: true }
+      { from: "./sample/manifest.json" },
+      { from: "./sample/icons" }
     ])
   ],
   module: {
