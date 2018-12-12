@@ -62,7 +62,7 @@
     "@types/lodash": "^4.14.65",
     "@types/minimist": "^1.2.0",
     "@types/mocha": "^5.2.5",
-    "@types/sinon": "^5.0.7",
+    "@types/sinon": "^7.0.0",
     "@types/webpack": "^4.4.20",
     "@types/ws": "^6.0.1",
     "autoprefixer": "^9.3.1",
