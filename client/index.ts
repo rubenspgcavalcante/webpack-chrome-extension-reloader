@@ -3,6 +3,7 @@ import * as minimist from "minimist";
 import argsParser from "./args-parser";
 import { SIG_EXIT } from "./events.constants";
 import ExtensionCompiler from "./ExtensionCompiler";
+import { error } from "util";
 
 install();
 const { _, ...args } = minimist(process.argv.slice(2));
@@ -15,7 +16,7 @@ try {
   if (err.type === SIG_EXIT) {
     process.exit(err.payload);
   } else {
-    console.error(err);
+    error(err);
     process.exit(err.code);
   }
 }

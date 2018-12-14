@@ -57,7 +57,7 @@
       if (type === SIGN_CHANGE) {
         tabs.query({ status: "complete" }, loadedTabs => {
           loadedTabs.forEach(tab =>
-            tabs.sendMessage(tab.id, { type: SIGN_RELOAD })
+            tab.id && tabs.sendMessage(tab.id, { type: SIGN_RELOAD })
           );
           socket.send(
             JSON.stringify({

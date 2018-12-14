@@ -1,14 +1,34 @@
 declare type ActionType = string;
-declare type Action = { type: ActionType, payload?: any };
+declare type Action = { type: ActionType; payload?: any };
 declare type ActionFactory = (payload?: any) => Action;
 
-declare type PluginOptions = { port: number, reloadPage: boolean, entries: EntriesOption };
-declare type EntriesOption = { background: string, contentScript: ContentScriptOption };
+declare type PluginOptions = {
+  port: number;
+  reloadPage: boolean;
+  entries: EntriesOption;
+};
+declare type EntriesOption = {
+  background: string;
+  contentScript: ContentScriptOption;
+};
 declare type ContentScriptOption = string | Array<string>;
 
-declare type MiddlewareTemplateParams = { port: number, reloadPage: boolean };
+declare type MiddlewareTemplateParams = { port: number; reloadPage: boolean };
 
-declare type LOG_LEVEL = 0 | 1 | 2 | 3 | 4 | 5;
+declare type LOG_NONE = 0;
+declare type LOG_LOG = 1;
+declare type LOG_INFO = 2;
+declare type LOG_WARN = 3;
+declare type LOG_ERROR = 4;
+declare type LOG_DEBUG = 5;
+
+declare type LOG_LEVEL =
+  | LOG_NONE
+  | LOG_LOG
+  | LOG_INFO
+  | LOG_WARN
+  | LOG_ERROR
+  | LOG_DEBUG;
 
 declare interface Source {
   source();
@@ -26,17 +46,20 @@ declare interface Source {
   updateHash(hash: string): void;
 }
 
-declare type SourceFactory = (concatSource: string, rootSource: string) => Source;
-declare type WebpackChunk = { files: Array<string>, name: string };
+declare type SourceFactory = (
+  concatSource: string,
+  rootSource: string
+) => Source;
+declare type WebpackChunk = { files: Array<string>; name: string };
 
-declare type ClientEvent = { type: string, payload: any };
+declare type ClientEvent = { type: string; payload: any };
 
-declare module '*.json' {
+declare module "*.json" {
   const json: any;
   export = json;
 }
 
-declare module '*.txt' {
+declare module "*.txt" {
   const text: string;
   export = text;
 }

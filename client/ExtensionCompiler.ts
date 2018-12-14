@@ -1,6 +1,8 @@
 import * as webpack from "webpack";
 import { Configuration } from "webpack";
 import ChromeExtensionReloader from "../src/ChromeExtensionReloader";
+import { error } from "util";
+import { info } from "../src/utils/logger";
 
 export default class ExtensionCompiler {
   private compiler;
@@ -16,9 +18,9 @@ export default class ExtensionCompiler {
   }
 
   private static treatErrors(err) {
-    console.error(err.stack || err);
+    error(err.stack || err);
     if (err.details) {
-      console.error(err.details);
+      error(err.details);
     }
   }
 
@@ -27,7 +29,7 @@ export default class ExtensionCompiler {
       if (err) {
         return ExtensionCompiler.treatErrors(err);
       }
-      console.info(stats.toString({ colors: true }));
+      info(stats.toString({ colors: true }));
     });
   }
 }

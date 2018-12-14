@@ -12,7 +12,6 @@ export default function middlewareInjector(
       ) {
         files.forEach(entryPoint => {
           if (/\.js$/.test(entryPoint)) {
-            console.log(entryPoint)
             prev[entryPoint] = sourceFactory(source, assets[entryPoint]);
           }
         });

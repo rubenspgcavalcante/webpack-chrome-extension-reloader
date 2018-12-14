@@ -16,10 +16,11 @@ import {
 import { cwd } from "process";
 import manual from "./manual";
 import { SIG_EXIT } from "./events.constants";
+import { log, error } from "util";
 
 export default (args: object) => {
   if (args[HELP]) {
-    console.log(manual());
+    log(manual());
     throw { type: SIG_EXIT, payload: 0 };
   }
 
@@ -44,8 +45,8 @@ export default (args: object) => {
     const webpackConfig = eval("require")(optPath);
     return { webpackConfig, pluginOptions };
   } catch (err) {
-    console.error(`[Error] Couldn't require the file: ${optPath}`);
-    console.error(err);
+    error(`[Error] Couldn't require the file: ${optPath}`);
+    error(err);
     throw { type: SIG_EXIT, payload: 1 };
   }
 };
