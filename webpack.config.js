@@ -2,17 +2,9 @@ const path = require("path");
 const { BannerPlugin } = require("webpack");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const pack = require("./package.json");
+const { isDevelopment, isProduction, test } = require("./src/utils/env");
 
-const { production, development, test } = [
-  "production",
-  "development",
-  "test"
-].reduce((acc, env) => {
-  acc[env] = val => (process.env.NODE_ENV === env ? val : null);
-  return acc;
-}, {});
-
-const mode = development ? "development" : "production";
+const mode = isDevelopment ? "development" : "production";
 
 module.exports = (env = { analyze: false }) => ({
   mode,
@@ -29,7 +21,7 @@ module.exports = (env = { analyze: false }) => ({
     libraryTarget: "umd"
   },
   plugins: [
-    env.analyze && production(new BundleAnalyzerPlugin({ sourceMap: true })),
+    env.analyze && isProduction(new BundleAnalyzerPlugin({ sourceMap: true })),
     new BannerPlugin({
       banner: "#!/usr/bin/env node",
       raw: true,
@@ -48,7 +40,8 @@ module.exports = (env = { analyze: false }) => ({
     extensions: [".ts", ".tsx", ".js"]
   },
   optimization: {
-    minimize: false
+    minimize: false,
+    nodeEnv: false
   },
   module: {
     rules: [

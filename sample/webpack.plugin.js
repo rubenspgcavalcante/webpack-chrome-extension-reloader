@@ -1,7 +1,7 @@
 const { resolve } = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const WebpackChromeReloaderPlugin = require("..");
+const WebpackChromeReloaderPlugin = require("../dist/webpack-chrome-extension-reloader");
 
 const mode = process.env.NODE_ENV;
 module.exports = {

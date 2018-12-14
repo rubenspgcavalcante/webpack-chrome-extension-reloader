@@ -1,6 +1,6 @@
-export const NONE: LOG_LEVEL = 0;
-export const LOG: LOG_LEVEL = 1;
-export const INFO: LOG_LEVEL = 2;
-export const WARN: LOG_LEVEL = 3;
-export const ERROR: LOG_LEVEL = 4;
-export const DEBUG: LOG_LEVEL = 5;
+export const NONE: LOG_NONE = 0;
+export const LOG: LOG_LOG = 1;
+export const INFO: LOG_INFO = 2;
+export const WARN: LOG_WARN = 3;
+export const ERROR: LOG_ERROR = 4;
+export const DEBUG: LOG_DEBUG = 5;
