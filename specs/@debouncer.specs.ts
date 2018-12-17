@@ -1,7 +1,7 @@
 import {assert} from "chai";
 import {useFakeTimers} from "sinon";
 import debouncer from "../src/decorators/@debouncer";
-import {DEBOUNCING_FRAME} from "../src/constants/fast-reloading.constants";
+import {FAST_RELOAD_DEBOUNCING_FRAME} from "../src/constants/fast-reloading.constants";
 
 const _ = require("lodash");
 
@@ -10,7 +10,7 @@ describe("debouncer decorator", () => {
   const clock = useFakeTimers();
 
   class Sample {
-    @debouncer(DEBOUNCING_FRAME, global)
+    @debouncer(FAST_RELOAD_DEBOUNCING_FRAME, global)
     test() {
       calls++;
     }
@@ -24,12 +24,12 @@ describe("debouncer decorator", () => {
     clock.restore();
   });
 
-  it(`It should debounce the method call for ${DEBOUNCING_FRAME} milli`, () => {
+  it(`It should debounce the method call for ${FAST_RELOAD_DEBOUNCING_FRAME} milli`, () => {
     const sample = new Sample();
     sample.test();
     clock.tick(400);
     sample.test();
-    clock.tick(DEBOUNCING_FRAME);
+    clock.tick(FAST_RELOAD_DEBOUNCING_FRAME);
     assert.equal(calls, 1);
   });
 });

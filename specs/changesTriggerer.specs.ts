@@ -1,7 +1,7 @@
 import {assert} from "chai";
 import {spy, stub} from "sinon";
 
-import changesTriggerer from "../src/utils/changes-triggerer";
+import changesTriggerer from "../src/hot-reload/changes-triggerer";
 
 describe("changesTriggerer", () => {
   let hotReloadServerMock;

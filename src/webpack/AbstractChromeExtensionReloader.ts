@@ -1,5 +1,5 @@
 import { Plugin } from "webpack";
-import CompilerEventsFacade from "../utils/CompilerEventsFacade";
+import CompilerEventsFacade from "./CompilerEventsFacade";
 
 export default abstract class AbstractChromeExtensionReloader
   implements Plugin {

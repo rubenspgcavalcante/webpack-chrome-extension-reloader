@@ -1,7 +1,7 @@
 import {assert} from "chai";
 import {stub} from "sinon";
 
-import middlewareInjector from "../src/utils/middleware-injector";
+import middlewareInjector from "../src/middleware/middleware-injector";
 
 describe("middleware-injector", () => {
   let assetsBuilder, singleContentChunks, multipleContentsChunks;
