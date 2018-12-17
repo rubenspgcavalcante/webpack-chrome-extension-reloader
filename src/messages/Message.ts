@@ -27,7 +27,9 @@ export default class Message {
   public get() {
     const code = `WCER-${this.getPrefix()}${this.referenceNumber}`;
     const refLink = bold(white(`${REF_URL}#${code}`));
-    return `[${code}] ${this.message}.\nVisit ${refLink} for complete details\n`;
+    return `[${code}] ${this.message}.\nVisit ${
+      refLink
+    } for complete details\n`;
   }
 
   toString() {

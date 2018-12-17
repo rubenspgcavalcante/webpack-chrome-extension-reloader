@@ -12,16 +12,20 @@
     "type": "git",
     "url": "git://github.com/rubenspgcavalcante/webpack-chrome-extension-reloader.git"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn format",
+      "pre-push": "yarn test"
+    }
+  },
   "scripts": {
     "build": "NODE_ENV=production webpack",
     "test": "NODE_ENV=test webpack && mocha dist/tests.js",
     "watch": "NODE_ENV=development webpack --watch",
     "analyze": "NODE_ENV=production webpack --env.analyze",
     "sample": "NODE_ENV=development webpack --config sample/webpack.plugin.js --watch",
-    "prepublish": "npm run build",
-    "auto-format": "prettier --write \"{src,client}/**/*.ts\"",
-    "precomit": "npm auto-format",
-    "prepush": "npm test"
+    "prepublish": "yarn build",
+    "format": "prettier --write \"{src,client}/**/*.ts\""
   },
   "author": "Rubens Pinheiro",
   "license": "MIT",

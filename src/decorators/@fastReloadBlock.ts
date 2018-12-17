@@ -19,7 +19,9 @@ export default function FastReloadBlock(maxCalls: number, wait: number) {
 
         let interval = wait / 1000;
         warn(
-          `Please wait ${interval} secs. for next reload to prevent your extension being blocked`
+          `Please wait ${
+            interval
+          } secs. for next reload to prevent your extension being blocked`
         );
         const logInterval = setInterval(() => warn(`${--interval} ...`), 1000);
 

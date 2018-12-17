@@ -5,8 +5,9 @@
 /*  external argument must be provided using it       */
 /* -------------------------------------------------- */
 (function(chrome, window) {
-  const signals: any = JSON.parse('<%= signals %>');
-  const config: any = JSON.parse('<%= config %>');
+  const signals: any = JSON.parse("<%= signals %>");
+  const config: any = JSON.parse("<%= config %>");
+  const errors: any = JSON.parse("<%= errors %>")
 
   const reloadPage: boolean = <"true" | "false">"<%= reloadPage %>" === "true";
   const wsHost = "<%= WSHost %>";
