@@ -37,7 +37,7 @@ describe("SignEmitter", () => {
     );
   });
 
-  it(`Should assign new rules if the Chrome/Chromium version is <= ${
+  it(`Should assign new rules if the Chrome/Chromium version is >= ${
     NEW_FAST_RELOAD_CHROME_VERSION
   }`, () => {
     const emitter = new SignEmitter(
