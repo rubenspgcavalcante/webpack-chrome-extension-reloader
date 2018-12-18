@@ -9,7 +9,7 @@ const mode = isDevelopment ? "development" : "production";
 module.exports = (env = { analyze: false }) => ({
   mode,
   target: "node",
-  entry: test({ tests: "./specs/index.specs.ts" }) || {
+  entry: test({ tests: "./specs/index.ts" }) || {
     "webpack-chrome-extension-reloader": "./src/index.ts",
     wcer: "./client/index.ts"
   },

@@ -239,16 +239,6 @@
     "@babel/helper-replace-supers" "^7.1.0"
     "@babel/plugin-syntax-class-properties" "^7.0.0"
 
-"@babel/plugin-proposal-decorators@^7.0.0":
-  version "7.1.6"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-decorators/-/plugin-proposal-decorators-7.1.6.tgz#460c31edbd01953efe45d491583b3ec31661d689"
-  integrity sha512-U42f8KhUbtlhUDyV/wK4Rq/wWh8vWyttYABckG/v0vVnMPvayOewZC/83CbVdmyP+UhEqI368FEQ7hHMfhBpQA==
-  dependencies:
-    "@babel/helper-plugin-utils" "^7.0.0"
-    "@babel/helper-replace-supers" "^7.1.0"
-    "@babel/helper-split-export-declaration" "^7.0.0"
-    "@babel/plugin-syntax-decorators" "^7.1.0"
-
 "@babel/plugin-proposal-json-strings@^7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-json-strings/-/plugin-proposal-json-strings-7.0.0.tgz#3b4d7b5cf51e1f2e70f52351d28d44fc2970d01e"
@@ -301,13 +291,6 @@
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-class-properties/-/plugin-syntax-class-properties-7.0.0.tgz#e051af5d300cbfbcec4a7476e37a803489881634"
   integrity sha512-cR12g0Qzn4sgkjrbrzWy2GE7m9vMl/sFkqZ3gIpAQdrvPDnLM8180i+ANDFIXfjHo9aqp0ccJlQ0QNZcFUbf9w==
-  dependencies:
-    "@babel/helper-plugin-utils" "^7.0.0"
-
-"@babel/plugin-syntax-decorators@^7.1.0":
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-decorators/-/plugin-syntax-decorators-7.1.0.tgz#2fa7c1a7905a299c9853ebcef340306675f9cbdc"
-  integrity sha512-uQvRSbgQ0nQg3jsmIixXXDCgSpkBolJ9X7NYThMKCcjvE8dN2uWJUzTUNNAeuKOjARTd+wUQV0ztXpgunZYKzQ==
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 
@@ -4472,6 +4455,11 @@ tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
   integrity sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
+
+tslint-config-prettier@^1.17.0:
+  version "1.17.0"
+  resolved "https://registry.yarnpkg.com/tslint-config-prettier/-/tslint-config-prettier-1.17.0.tgz#946ed6117f98f3659a65848279156d87628c33dc"
+  integrity sha512-NKWNkThwqE4Snn4Cm6SZB7lV5RMDDFsBwz6fWUkTxOKGjMx8ycOHnjIbhn7dZd5XmssW3CwqUjlANR6EhP9YQw==
 
 tslint-loader@^3.6.0:
   version "3.6.0"

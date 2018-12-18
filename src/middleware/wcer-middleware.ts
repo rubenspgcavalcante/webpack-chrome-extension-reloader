@@ -22,11 +22,13 @@
   const { runtime, tabs } = chrome;
   const manifest = runtime.getManifest();
 
+// =============================== Helper functions ======================================= //
   const formatter = (msg: string) => `[ WCER: ${msg} ]`;
   const logger = (msg, level = "info") => console[level](formatter(msg));
   const timeFormatter = (date: Date) =>
     date.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
 
+// ========================== Called only on content scripts ============================== //
   function contentScriptWorker() {
     runtime.sendMessage({ type: SIGN_CONNECT }, msg => console.info(msg));
 
@@ -44,6 +46,7 @@
     });
   }
 
+// ======================== Called only on background scripts ============================= //
   function backgroundWorker(socket: WebSocket) {
     runtime.onMessage.addListener((action: Action, sender, sendResponse) => {
       if (action.type === SIGN_CONNECT) {
@@ -85,7 +88,7 @@
       );
 
       const intId = setInterval(() => {
-        logger("WEPR Attempting to reconnect ...");
+        logger("Attempting to reconnect (tip: Check if Webpack is running)");
         const ws = new WebSocket(wsHost);
         ws.addEventListener("open", () => {
           clearInterval(intId);
@@ -96,10 +99,12 @@
     });
   }
 
+  // ======================= Bootstraps the middleware =========================== //
   runtime.reload
     ? backgroundWorker(new WebSocket(wsHost))
     : contentScriptWorker();
 })(chrome, window);
+
 /* ----------------------------------------------- */
 /* End of Webpack Chrome Hot Extension Middleware  */
 /* ----------------------------------------------- */

@@ -12,16 +12,20 @@
     "type": "git",
     "url": "git://github.com/rubenspgcavalcante/webpack-chrome-extension-reloader.git"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn format",
+      "pre-push": "yarn test"
+    }
+  },
   "scripts": {
     "build": "NODE_ENV=production webpack",
     "test": "NODE_ENV=test webpack && mocha dist/tests.js",
     "watch": "NODE_ENV=development webpack --watch",
     "analyze": "NODE_ENV=production webpack --env.analyze",
     "sample": "NODE_ENV=development webpack --config sample/webpack.plugin.js --watch",
-    "prepublish": "npm run build",
-    "auto-format": "prettier --write \"{src,client}/**/*.ts\"",
-    "precomit": "npm auto-format",
-    "prepush": "npm test"
+    "prepublish": "yarn build",
+    "format": "prettier --write \"{src,client}/**/*.ts\""
   },
   "author": "Rubens Pinheiro",
   "license": "MIT",
@@ -49,7 +53,6 @@
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
-    "@babel/plugin-proposal-decorators": "^7.0.0",
     "@babel/plugin-proposal-logical-assignment-operators": "^7.0.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
@@ -82,6 +85,7 @@
     "style-loader": "^0.23.1",
     "ts-loader": "^5.3.1",
     "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.17.0",
     "tslint-loader": "^3.6.0",
     "typescript": "^3.2.1",
     "webpack": "^4.26.1",
