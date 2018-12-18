@@ -667,10 +667,10 @@
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.0.0.tgz#4c9adabd2d04265769e6d9e847e86cc404dc7dcd"
 
-"@types/chrome@^0.0.75":
-  version "0.0.75"
-  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.75.tgz#11cb716cdaa13fc15c47bfcc11da325f375f23d1"
-  integrity sha512-wfy/8egkLkznDD8zcimbqJBvBoJrmSr0mcptnnVdi5MbzKidlLr7DiRoYVPHIGKdMVlv1kaGIQ8l+RD3moy89A==
+"@types/chrome@^0.0.76":
+  version "0.0.76"
+  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.76.tgz#43efd8cc144772808f11cdf5b50e559941fea657"
+  integrity sha512-SBUody36BLcWdUTVDgBS5zEWX8njOfkJoouTGJaQAuZRQw6ZQYR51/1nvYrt+kkERrXhjRwBJhHKIAfHCV9nLg==
   dependencies:
     "@types/filesystem" "*"
 
