@@ -36,14 +36,6 @@ export default class SignEmitter {
     });
   }
 
-  private _sendMsg(msg: any) {
-    this._server.clients.forEach(client => {
-      if (client.readyState === OPEN) {
-        client.send(JSON.stringify(msg));
-      }
-    });
-  }
-
   private _setupSafeSignChange() {
     return (reloadPage: boolean, onSuccess: Function, onError: Function) => {
       try {
@@ -53,6 +45,14 @@ export default class SignEmitter {
         onError(err);
       }
     };
+  }
+
+  private _sendMsg(msg: any) {
+    this._server.clients.forEach(client => {
+      if (client.readyState === OPEN) {
+        client.send(JSON.stringify(msg));
+      }
+    });
   }
 
   private _satisfies(browserVersion: string, targetVersion: string) {
