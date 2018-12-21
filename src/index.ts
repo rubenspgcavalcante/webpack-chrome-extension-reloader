@@ -10,7 +10,7 @@ const logLevel =
     production: ERROR,
     development: DEBUG,
     test: NONE
-  }[process.env.NODE_ENV] || NONE;
+  }[process.env.NODE_ENV] || ERROR;
 
 setLogLevel(logLevel);
 export = ChromeExtensionReloader;

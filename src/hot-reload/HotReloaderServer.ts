@@ -25,7 +25,10 @@ export default class HotReloaderServer {
   }
 
   signChange(reloadPage: boolean): Promise<any> {
-    return this._signEmiter.safeSignChange(reloadPage);
+    if(this._signEmiter) {
+      return this._signEmiter.safeSignChange(reloadPage);
+    }
+    else return Promise.resolve(null);
   }
 
   private _getBrowserVersion(userAgent) {
