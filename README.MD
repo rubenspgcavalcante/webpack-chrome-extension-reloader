@@ -51,30 +51,34 @@ plugins: [
 
 You can also set some options (the following are the default ones):
 ```js
-entry: {
-    'content-script': './my-content-script.js',
-    background: './my-background-script.js'
-},
-//...
-plugins: [
-    new ChromeExtensionReloader({
-      port: 9090, // Which port use to create the server
-      reloadPage: true, // Force the reload of the page also
-      entries: { // The entries used for the content/background scripts
-        contentScript: 'content-script', // Use the entry names, not the file name or the path
-        background: 'background' // *REQUIRED
-      }
-    })
-]
+// webpack.dev.js
+module.exports = {
+  mode: "development", // The plugin is activated only if mode is set to development
+  watch: true,
+  entry: {
+      'content-script': './my-content-script.js',
+      background: './my-background-script.js'
+  },
+  //...
+  plugins: [
+      new ChromeExtensionReloader({
+        port: 9090, // Which port use to create the server
+        reloadPage: true, // Force the reload of the page also
+        entries: { // The entries used for the content/background scripts
+          contentScript: 'content-script', // Use the entry names, not the file name or the path
+          background: 'background' // *REQUIRED
+        }
+      })
+  ]
+}
 ```
 
 And then just run your application with Webpack in watch mode:
 ```bash
-NODE_ENV=development webpack --config myconfig.js --watch
+NODE_ENV=development webpack --config myconfig.js --mode=development --watch 
 ```
 
-**Important**: You need to run with `--watch`, as the plugin will be able to sign the extension 
-only if webpack triggers the rebuild.
+**Important**: You need to set `--mode=development` to activate the plugin (only if you didn't set on the webpack.config.js already) then you need to run with `--watch`, as the plugin will be able to sign the extension only if webpack triggers the rebuild (again, only if you didn't set on webpack.config).
 
 ### Multiple Content Script support
 If you use more than one content script in your extension, like:
@@ -101,7 +105,7 @@ plugins: [
 
 ### CLI
 If you don't want all the plugin setup, you can just use the client that comes with the package.  
-You can use by intalling the package globably, or directly using `npx`
+You can use by intalling the package globably, or directly using `npx` after installing locally the plugin:
 
 ```bash
 npx wcer
@@ -118,14 +122,14 @@ npx wcer --content-script my-first-content.js,my-second-content.js,my-third-cont
 
 ### Client options
 
-|        name        |    default        |                               description                         |
-|--------------------|-------------------|-------------------------------------------------------------------|
-| --help             |                   | Shows this help                                                   |
-| --config           | webpack.config.js | The webpack configuration file path                               |
-| --port             | 9090              | The port to run the server                                        |
-| --content-script   | content-script    | The **entry/entries** name(s) for the content script(s)           |
-| --background       | background        | The **entry** name for the background script                      |
-| --no-page-reload   |                   | Disable the auto reloading of all **pages** which runs the plugin |
+| name             | default           | description                                                       |
+| ---------------- | ----------------- | ----------------------------------------------------------------- |
+| --help           |                   | Shows this help                                                   |
+| --config         | webpack.config.js | The webpack configuration file path                               |
+| --port           | 9090              | The port to run the server                                        |
+| --content-script | content-script    | The **entry/entries** name(s) for the content script(s)           |
+| --background     | background        | The **entry** name for the background script                      |
+| --no-page-reload |                   | Disable the auto reloading of all **pages** which runs the plugin |
 
 Every time webpack triggers a compilation, the extension reloader are going to do the hot reload :)  
 **Note:** the plugin only works on **development** mode, so don't forget to set the NODE_ENV before run the command above

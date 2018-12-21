@@ -10,20 +10,21 @@ import { warn } from "./utils/logger";
 import { isDevelopment } from "./utils/env";
 
 export default class ChromeExtensionReloader extends AbstractChromePluginReloader {
+  private _opts?: PluginOptions;
+
   constructor(options?: PluginOptions) {
     super();
-    if (isDevelopment) {
-      const { reloadPage, port, entries } = merge(defaultOptions, options);
-
-      this._injector = middlewareInjector(entries, { port, reloadPage });
-      this._triggerer = changesTriggerer(port, reloadPage);
-    }
+    this._opts = options;
   }
 
   apply(compiler: any) {
-    this._eventAPI = new CompilerEventsFacade(compiler);
+    const { reloadPage, port, entries } = merge(defaultOptions, this._opts);
 
-    if (isDevelopment) {
+    if (compiler.options.mode === "development") {
+      this._eventAPI = new CompilerEventsFacade(compiler);
+      this._injector = middlewareInjector(entries, { port, reloadPage });
+      this._triggerer = changesTriggerer(port, reloadPage);
+
       this._eventAPI.afterOptimizeChunkAssets((comp, chunks) => {
         if (!compiler.options.entry.background) {
           throw new TypeError(bgScriptRequiredMsg.get());
