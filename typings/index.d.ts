@@ -15,6 +15,8 @@ declare type ContentScriptOption = string | Array<string>;
 
 declare type MiddlewareTemplateParams = { port: number; reloadPage: boolean };
 
+declare type VersionPair = [number | undefined, number | undefined];
+
 declare type LOG_NONE = 0;
 declare type LOG_LOG = 1;
 declare type LOG_INFO = 2;

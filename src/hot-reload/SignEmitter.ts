@@ -56,12 +56,12 @@ export default class SignEmitter {
   }
 
   private _satisfies(browserVersion: string, targetVersion: string) {
-    const versionPairs = zip(
+    const versionPairs: Array<VersionPair> = zip(
       browserVersion.split(".").map(n => parseInt(n)),
       targetVersion.split(".").map(n => parseInt(n))
     );
 
-    for (let [version, target] of versionPairs) {
+    for (let [version = 0, target = 0] of versionPairs) {
       if (version !== target) return version > target;
     }
     return true;
