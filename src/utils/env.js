@@ -3,7 +3,7 @@ const { production, development, test } = [
   "development",
   "test"
 ].reduce((acc, env) => {
-  acc[env] = val => (process.env["NODE_ENV"] === env ? val : null);
+  acc[env] = (val) => (process.env["NODE_ENV"] === env ? val : null);
   return acc;
 }, {});
 

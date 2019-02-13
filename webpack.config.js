@@ -34,7 +34,7 @@ module.exports = (env = { analyze: false }) => ({
       entryOnly: true,
       include: 'webpack-chrome-extension-reloader'
     })
-  ].filter(plugin => !!plugin),
+  ].filter((plugin) => !!plugin),
   externals: [
     ...Object.keys(pack.dependencies),
     "webpack",
