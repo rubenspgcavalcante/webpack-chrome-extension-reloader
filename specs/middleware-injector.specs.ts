@@ -3,6 +3,7 @@ import { stub } from "sinon";
 
 import middlewareInjector from "../src/middleware/middleware-injector";
 import * as middlewareSourceBuilder from "../src/middleware/middleware-source-builder";
+import { EntriesOption } from "webpack-chrome-extension-reloader";
 
 describe("middleware-injector", () => {
   let assetsBuilder, singleContentChunks, multipleContentsChunks;

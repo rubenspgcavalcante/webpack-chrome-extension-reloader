@@ -2,17 +2,6 @@ declare type ActionType = string;
 declare type Action = { type: ActionType; payload?: any };
 declare type ActionFactory = (payload?: any) => Action;
 
-declare type PluginOptions = {
-  port: number;
-  reloadPage: boolean;
-  entries: EntriesOption;
-};
-declare type EntriesOption = {
-  background: string;
-  contentScript: ContentScriptOption;
-};
-declare type ContentScriptOption = string | Array<string>;
-
 declare type MiddlewareTemplateParams = { port: number; reloadPage: boolean };
 
 declare type VersionPair = [number | undefined, number | undefined];
@@ -52,6 +41,7 @@ declare type SourceFactory = (
   concatSource: string,
   rootSource: string
 ) => Source;
+
 declare type WebpackChunk = { files: Array<string>; name: string };
 
 declare type ClientEvent = { type: string; payload: any };

@@ -1,8 +1,9 @@
 import * as webpack from "webpack";
 import { Configuration } from "webpack";
-import ChromeExtensionReloader from "../src/ChromeExtensionReloader";
+import ChromeExtensionReloaderImpl from "../src/ChromeExtensionReloader";
 import { error } from "util";
 import { info } from "../src/utils/logger";
+import { PluginOptions } from "webpack-chrome-extension-reloader";
 
 export default class ExtensionCompiler {
   private compiler;
@@ -14,7 +15,7 @@ export default class ExtensionCompiler {
     this.compiler = webpack(
       typeof config === "function" ? config(process.env, process.argv) : config
     );
-    new ChromeExtensionReloader(pluginOptions).apply(this.compiler);
+    new ChromeExtensionReloaderImpl(pluginOptions).apply(this.compiler);
   }
 
   private static treatErrors(err) {
