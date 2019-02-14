@@ -1,6 +1,5 @@
 src/
 sample/
-typings/
 specs/
 dist/tests.js
 dist/tests.js.map

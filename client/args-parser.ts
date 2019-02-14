@@ -17,6 +17,7 @@ import { cwd } from "process";
 import manual from "./manual";
 import { SIG_EXIT } from "./events.constants";
 import { log, error } from "util";
+import { PluginOptions } from "webpack-chrome-extension-reloader";
 
 export default (args: object) => {
   if (args[HELP]) {

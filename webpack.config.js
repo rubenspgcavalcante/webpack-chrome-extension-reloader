@@ -27,8 +27,14 @@ module.exports = (env = { analyze: false }) => ({
       raw: true,
       entryOnly: true,
       include: "wcer"
+    }),
+    new BannerPlugin({
+      banner: '/// <reference path="../typings/[name].d.ts" />',
+      raw: true,
+      entryOnly: true,
+      include: 'webpack-chrome-extension-reloader'
     })
-  ].filter(plugin => !!plugin),
+  ].filter((plugin) => !!plugin),
   externals: [
     ...Object.keys(pack.dependencies),
     "webpack",

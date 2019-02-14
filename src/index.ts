@@ -1,5 +1,5 @@
 import { install } from "source-map-support";
-import ChromeExtensionReloader from "./ChromeExtensionReloader";
+import ChromeExtensionReloaderImpl from "./ChromeExtensionReloader";
 import { DEBUG, ERROR, NONE } from "./constants/log.constants";
 import { setLogLevel } from "./utils/logger";
 
@@ -13,4 +13,4 @@ const logLevel =
   }[process.env.NODE_ENV] || ERROR;
 
 setLogLevel(logLevel);
-export = ChromeExtensionReloader;
+export = ChromeExtensionReloaderImpl;

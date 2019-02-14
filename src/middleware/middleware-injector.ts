@@ -1,5 +1,6 @@
 import { ConcatSource } from "webpack-sources";
 import middleWareSourceBuilder from "./middleware-source-builder";
+import { EntriesOption } from "webpack-chrome-extension-reloader";
 
 export default function middlewareInjector(
   { background, contentScript }: EntriesOption,
