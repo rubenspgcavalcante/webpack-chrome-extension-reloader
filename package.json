@@ -60,7 +60,7 @@
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@types/chai": "^4.0.0",
-    "@types/chrome": "^0.0.80",
+    "@types/chrome": "^0.0.81",
     "@types/colors": "^1.1.3",
     "@types/lodash": "^4.14.120",
     "@types/minimist": "^1.2.0",
