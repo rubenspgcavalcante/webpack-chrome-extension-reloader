@@ -11,11 +11,11 @@ declare module "webpack-chrome-extension-reloader" {
 
   type ContentScriptOption = string | Array<string>;
 
-  interface ChromeExtensionReloaderConstructor {
-    new (options?: PluginOptions): ChromeExtensionReloader;
+  export default interface ChromeExtensionReloader {
+    new (options?: PluginOptions): ChromeExtensionReloaderInstance;
   }
 
-  export default interface ChromeExtensionReloader {
+  export interface ChromeExtensionReloaderInstance {
     apply(compiler: Object): void;
   }
 }

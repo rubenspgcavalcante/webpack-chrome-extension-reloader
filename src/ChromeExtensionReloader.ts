@@ -9,12 +9,13 @@ import { bgScriptRequiredMsg } from "./messages/errors";
 import { warn } from "./utils/logger";
 
 import { Compiler } from "webpack";
-import ChromeExtensionReloader, {
+import {
+  ChromeExtensionReloaderInstance,
   PluginOptions
 } from "webpack-chrome-extension-reloader";
 
 export default class ChromeExtensionReloaderImpl extends AbstractChromePluginReloader
-  implements ChromeExtensionReloader {
+  implements ChromeExtensionReloaderInstance {
   private _opts?: PluginOptions;
   constructor(options?: PluginOptions) {
     super();
