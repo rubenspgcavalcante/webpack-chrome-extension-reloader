@@ -11,4 +11,4 @@ export const browserVerWrongFormat = new Message(
   WARN,
   2,
   "Warning, Chrome browser with unexpected version format. Expected x.x.x.x, Provided <%= version %>"
-)
+);
