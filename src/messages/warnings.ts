@@ -6,3 +6,9 @@ export const onlyOnDevelopmentMsg = new Message(
   1,
   "Warning, Chrome Extension Reloader Plugin was not enabled! It runs only on webpack --mode=development"
 );
+
+export const browserVerWrongFormat = new Message(
+  WARN,
+  2,
+  "Warning, Chrome browser with unexpected version format. Expected x.x.x.x, Provided <%= version %>"
+)

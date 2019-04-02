@@ -1,6 +1,7 @@
 import { INFO, WARN, ERROR } from "../constants/log.constants";
 import { REF_URL } from "../constants/reference-docs.constants";
-import { blue, white, bold } from "colors/safe";
+import { white, bold } from "colors/safe";
+import { template } from "lodash";
 
 export default class Message {
   private referenceNumber: number;
@@ -24,10 +25,10 @@ export default class Message {
     }
   }
 
-  public get() {
+  public get(additionalData: object = {}) {
     const code = `WCER-${this.getPrefix()}${this.referenceNumber}`;
     const refLink = bold(white(`${REF_URL}#${code}`));
-    return `[${code}] ${this.message}.\nVisit ${
+    return `[${code}] ${template(this.message, additionalData)}.\nVisit ${
       refLink
     } for complete details\n`;
   }
