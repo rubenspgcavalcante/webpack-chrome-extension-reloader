@@ -4,7 +4,7 @@ import {
   SOCKET_ERR_CODE_REF
 } from "../constants/midleware-config.constants";
 import * as signals from "../utils/signals";
-import * as rawSource from "raw-loader!../middleware/wcer-middleware";
+import rawSource from "raw-loader!./wcer-middleware.raw";
 
 export default function middleWareSourceBuilder({
   port,
