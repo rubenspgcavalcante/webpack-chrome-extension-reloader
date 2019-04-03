@@ -12,7 +12,7 @@ import {
 import { signChange } from "../utils/signals";
 import { debounceSignal, fastReloadBlocker } from "../utils/block-protection";
 import { warn } from "../utils/logger";
-import { browserVerWrongFormat } from "../messages/warnings";
+import { browserVerWrongFormatMsg } from "../messages/warnings";
 
 export default class SignEmitter {
   private _safeSignChange: Function;
@@ -59,7 +59,7 @@ export default class SignEmitter {
 
   private _satisfies(browserVersion: string, targetVersion: string) {
     if (!/\d+\.\d+\.\d+\.\d+/.test(browserVersion)) {
-      warn(browserVerWrongFormat.get({ version: browserVersion }));
+      warn(browserVerWrongFormatMsg.get({ version: browserVersion }));
       return false;
     }
 

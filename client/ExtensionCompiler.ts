@@ -9,7 +9,7 @@ export default class ExtensionCompiler {
   private compiler;
 
   constructor(
-    config: (env: string, args: Array<any>) => Configuration | Configuration,
+    config: (env: Object, args: Array<any>) => Configuration | Configuration,
     pluginOptions: PluginOptions
   ) {
     this.compiler = webpack(

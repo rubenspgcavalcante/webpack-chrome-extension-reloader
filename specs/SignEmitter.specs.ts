@@ -12,7 +12,7 @@ import {
   NEW_FAST_RELOAD_DEBOUNCING_FRAME,
   NEW_FAST_RELOAD_CALLS
 } from "../src/constants/fast-reloading.constants";
-import { browserVerWrongFormat } from "../src/messages/warnings";
+import { browserVerWrongFormatMsg } from "../src/messages/warnings";
 
 describe("SignEmitter", () => {
   let mockedServer: any;
@@ -67,7 +67,7 @@ describe("SignEmitter", () => {
     );
 
     assert(
-      warnSpy.calledWith(browserVerWrongFormat.get({ version: browserVer }))
+      warnSpy.calledWith(browserVerWrongFormatMsg.get({ version: browserVer }))
     );
   });
 });
