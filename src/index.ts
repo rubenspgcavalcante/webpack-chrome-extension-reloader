@@ -5,12 +5,13 @@ import { setLogLevel } from "./utils/logger";
 
 install();
 
-const logLevel =
-  {
-    production: ERROR,
-    development: DEBUG,
-    test: NONE
-  }[process.env.NODE_ENV] || ERROR;
+const logLevel = process.env.NODE_ENV
+  ? {
+      production: ERROR,
+      development: DEBUG,
+      test: NONE
+    }[process.env.NODE_ENV]
+  : ERROR;
 
 setLogLevel(logLevel);
 export = ChromeExtensionReloaderImpl;

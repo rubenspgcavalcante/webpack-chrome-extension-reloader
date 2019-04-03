@@ -1,5 +1,6 @@
 import { install } from "source-map-support";
 
+import "./ChromeExtensionReloader.specs";
 import "./middleware-source-builder.specs";
 import "./middleware-injector.specs";
 import "./changes-triggerer.specs";
