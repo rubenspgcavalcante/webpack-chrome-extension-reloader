@@ -22,13 +22,13 @@
   const { runtime, tabs } = chrome;
   const manifest = runtime.getManifest();
 
-// =============================== Helper functions ======================================= //
+  // =============================== Helper functions ======================================= //
   const formatter = (msg: string) => `[ WCER: ${msg} ]`;
   const logger = (msg, level = "info") => console[level](formatter(msg));
   const timeFormatter = (date: Date) =>
     date.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
 
-// ========================== Called only on content scripts ============================== //
+  // ========================== Called only on content scripts ============================== //
   function contentScriptWorker() {
     runtime.sendMessage({ type: SIGN_CONNECT }, msg => console.info(msg));
 
@@ -46,7 +46,7 @@
     });
   }
 
-// ======================== Called only on background scripts ============================= //
+  // ======================== Called only on background scripts ============================= //
   function backgroundWorker(socket: WebSocket) {
     runtime.onMessage.addListener((action: Action, sender, sendResponse) => {
       if (action.type === SIGN_CONNECT) {
@@ -59,8 +59,8 @@
 
       if (type === SIGN_CHANGE) {
         tabs.query({ status: "complete" }, loadedTabs => {
-          loadedTabs.forEach(tab =>
-            tab.id && tabs.sendMessage(tab.id, { type: SIGN_RELOAD })
+          loadedTabs.forEach(
+            tab => tab.id && tabs.sendMessage(tab.id, { type: SIGN_RELOAD })
           );
           socket.send(
             JSON.stringify({

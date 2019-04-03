@@ -6,6 +6,7 @@ export default abstract class AbstractChromeExtensionReloader
   protected _injector: Function;
   protected _triggerer: Function;
   protected _eventAPI: CompilerEventsFacade;
+  protected _chunkVersions: Object;
 
   context: any;
 

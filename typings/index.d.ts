@@ -42,7 +42,7 @@ declare type SourceFactory = (
   rootSource: string
 ) => Source;
 
-declare type WebpackChunk = { files: Array<string>; name: string };
+declare type WebpackChunk = { files: Array<string>; name: string, hash: string };
 
 declare type ClientEvent = { type: string; payload: any };
 

@@ -12,7 +12,8 @@ import "../typings/webpack-augment";
 
 import {
   ChromeExtensionReloaderInstance,
-  PluginOptions
+  PluginOptions,
+  EntriesOption
 } from "webpack-chrome-extension-reloader";
 
 export default class ChromeExtensionReloaderImpl extends AbstractChromePluginReloader
@@ -21,6 +22,7 @@ export default class ChromeExtensionReloaderImpl extends AbstractChromePluginRel
   constructor(options?: PluginOptions) {
     super();
     this._opts = options;
+    this._chunkVersions = {};
   }
 
   _isWebpackGToEV4() {
@@ -29,6 +31,19 @@ export default class ChromeExtensionReloaderImpl extends AbstractChromePluginRel
       if (parseInt(major) >= 4) return true;
     }
     return false;
+  }
+
+  _contentOrBgChanged(
+    chunks: WebpackChunk[],
+    { background, contentScript }: EntriesOption
+  ) {
+    return chunks
+      .filter(({ name, hash }) => {
+        const oldVersion = this._chunkVersions[name];
+        this._chunkVersions[name] = hash;
+        return hash !== oldVersion;
+      })
+      .some(({ name }) => name === background || name === contentScript);
   }
 
   _registerPlugin(compiler: webpack.Compiler) {
@@ -46,11 +61,13 @@ export default class ChromeExtensionReloaderImpl extends AbstractChromePluginRel
         ...this._injector(comp.assets, chunks)
       };
     });
-    this._eventAPI.afterEmit((comp, done) =>
-      this._triggerer()
-        .then(done)
-        .catch(done)
-    );
+    this._eventAPI.afterEmit((comp, done) => {
+      if (this._contentOrBgChanged(comp.chunks, entries)) {
+        this._triggerer()
+          .then(done)
+          .catch(done);
+      }
+    });
   }
 
   apply(compiler: webpack.Compiler) {
