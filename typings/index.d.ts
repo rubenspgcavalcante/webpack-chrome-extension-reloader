@@ -63,5 +63,5 @@ declare module "*.source.ts" {
 
 declare module "raw-loader*" {
   const rawText: string;
-  export = rawText;
+  export default rawText;
 }
