@@ -7,8 +7,7 @@ import CompilerEventsFacade from "./webpack/CompilerEventsFacade";
 import { onlyOnDevelopmentMsg } from "./messages/warnings";
 import { bgScriptRequiredMsg } from "./messages/errors";
 import { warn } from "./utils/logger";
-import * as webpack from "webpack";
-import "../typings/webpack-augment";
+import { Compiler, version } from "webpack";
 
 import {
   ChromeExtensionReloaderInstance,
@@ -26,8 +25,8 @@ export default class ChromeExtensionReloaderImpl extends AbstractChromePluginRel
   }
 
   _isWebpackGToEV4() {
-    if (webpack.version) {
-      const [major] = webpack.version.split(".");
+    if (version) {
+      const [major] = version.split(".");
       if (parseInt(major) >= 4) return true;
     }
     return false;
@@ -46,7 +45,7 @@ export default class ChromeExtensionReloaderImpl extends AbstractChromePluginRel
       .some(({ name }) => name === background || name === contentScript);
   }
 
-  _registerPlugin(compiler: webpack.Compiler) {
+  _registerPlugin(compiler: Compiler) {
     const { reloadPage, port, entries } = merge(defaultOptions, this._opts);
 
     this._eventAPI = new CompilerEventsFacade(compiler);
@@ -70,7 +69,7 @@ export default class ChromeExtensionReloaderImpl extends AbstractChromePluginRel
     });
   }
 
-  apply(compiler: webpack.Compiler) {
+  apply(compiler: Compiler) {
     if (
       (this._isWebpackGToEV4()
         ? compiler.options.mode
