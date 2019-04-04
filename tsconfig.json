@@ -19,8 +19,7 @@
   ],
   "files": [
     "typings/index.d.ts",
-    "typings/webpack-chrome-extension-reloader.d.ts",
-    "typings/webpack-augment.ts"
+    "typings/webpack-chrome-extension-reloader.d.ts"
   ],
   "include": ["client/**/*", "src/**/*", "specs/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"],

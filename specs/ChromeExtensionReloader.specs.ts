@@ -2,7 +2,6 @@ import { assert } from "chai";
 import { spy, stub, SinonStub } from "sinon";
 import ChromeExtensionReloaderImpl from "../src/ChromeExtensionReloader";
 import * as webpack from "webpack";
-import "../typings/webpack-augment";
 import { ChromeExtensionReloaderInstance } from "webpack-chrome-extension-reloader";
 
 describe("ChromeExtensionReloader", () => {
@@ -57,7 +56,7 @@ describe("ChromeExtensionReloader", () => {
 
       plugin.apply(mockedCompiler);
       assert(registerStub.calledOnce);
-      
+
       stub.restore();
     });
   });
