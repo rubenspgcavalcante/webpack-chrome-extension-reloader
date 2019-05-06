@@ -1,3 +1,6 @@
+# Disclaimer
+This repository and package are archived, for now on it's recommended to use [webpack-extension-reloader](https://github.com/rubenspgcavalcante/webpack-extension-reloader)
+
 # Webpack Chrome Extension Reloader
 A Webpack plugin to enable hot reloading while developing Chrome extensions.
 
